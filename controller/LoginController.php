@@ -33,9 +33,10 @@ class LoginController {
         $username = $this->v->getRequestUserName();
         $password = $this->v->getRequestPassword();
         $this->getNewUserInstance($username, $password);
+        $this->ls->loginByUserCredentials($user);
     }
     private function loginBySession() {
-        
+        $this->ss->loginBySessionData();
     }
     private function getNewUserIstance($username, $password) : \model\User {
         return new \model\User($username, $password);

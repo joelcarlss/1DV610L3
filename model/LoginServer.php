@@ -21,9 +21,6 @@ class LoginServer {
         
     }
     
-    public function loginBySessionData ($user) {
-    }
-    
     public function logOut () {
     }
     
