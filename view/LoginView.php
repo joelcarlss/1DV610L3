@@ -79,7 +79,7 @@ class LoginView {
 		return $_POST[$this->password];
 	}
 	
-	public function isALoginAttemptByPost() {
+	public function postIsLogin() {
 		return $this->postIsType($this->login);
 	}
 

@@ -2,7 +2,7 @@
 
 namespace model;
 use Exception;
-class UserCredentials {
+class User {
     
     private $username;
     private $password;

@@ -9,6 +9,7 @@ require_once('view/DashBoard.php');
 // MODEL
 require_once('model/ServerTime.php');
 require_once('model/LoginServer.php');
+require_once('model/SessionServer.php');
 // CONTROLLER
 require_once('controller/Controller.php');
 require_once('controller/LoginController.php');
