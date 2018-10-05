@@ -10,6 +10,8 @@ require_once('view/DashBoard.php');
 require_once('model/ServerTime.php');
 require_once('model/LoginServer.php');
 require_once('model/SessionServer.php');
+require_once('model/RegisterServer.php');
+require_once('model/DatabaseConnection.php');
 // CONTROLLER
 require_once('controller/Controller.php');
 require_once('controller/LoginController.php');
@@ -26,8 +28,11 @@ $d = new \view\DashBoard();
 $st = new \model\ServerTime();
 $ls = new \model\LoginServer();
 $ss = new \model\SessionServer();
+$dc = new \model\DatabaseConnection();
+$rs = new \model\RegisterServer($dc);
 
 $lc = new \controller\LoginController($v, $d, $ls, $ss);
+$rc = new \controller\RegisterController($rs);
 $c = new \controller\Controller($v, $dtv, $d, $st, $ls, $lc);
 
 $lv = new \view\LayoutView(false, $v, $dtv, $d);
