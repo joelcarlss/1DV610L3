@@ -35,7 +35,7 @@ class LoginServer {
     public function hashPasswordString ($password) {
         return password_hash($password, PASSWORD_DEFAULT);
     }
-    private function stringNotEmpty ($string) {
+    public function stringNotEmpty ($string) {
         return (strlen($string) > 0);
     }
 }

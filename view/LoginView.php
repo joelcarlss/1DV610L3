@@ -17,9 +17,7 @@ class LoginView {
 	private $authErrorMessage = 'Wrong name or password';
 	private $logoutMessage = 'Bye bye!';
 	private $authErrorCookieMessage = 'Wrong information in cookies';
-
 	
-
 	/**
 	 * Create HTTP response
 	 *

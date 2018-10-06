@@ -1,7 +1,6 @@
 <?php
 namespace model;
 use Exception;
-// use PDO;
   /**
    * Class holds database connection
    * Source of code: https://www.youtube.com/watch?v=bjT5PJn0Mu8
@@ -18,13 +17,13 @@ use Exception;
      * @return PDO Database Connection
      */
     public function connect () {
-      $server = "localhost";
-      $database = "user_data";
-      $username = "root";
-      $password = '';
+      $server = "192.168.64.2";
+      $database = "auth";
+      $username = "asd";
+      $password = 'asd';
 
       try {
-        return new \PDO("mysql:host=$server;dbname=$database;", $username, $password);
+        return $conn = new \PDO("mysql:host=$server;dbname=$database;", $username, $password);
 			//  return new PDO("mysql:host=" . $this->server . ";dbname=" . $this->database . ";", $this->username, $this->password);
 		  }
 		  catch(PDOException $e) {

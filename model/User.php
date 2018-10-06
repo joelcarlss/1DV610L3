@@ -16,8 +16,8 @@ class User {
      * Hashes string
      * @return string
      */
-    public function setAndHashPassword ($password) {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    public function getHashedPassword () {
+        return password_hash($this->password, PASSWORD_DEFAULT);
 
     }
 

@@ -1,5 +1,6 @@
 <?php
 namespace model;
+require_once('model/DatabaseConnection.php');
 
 use Exception;
 
@@ -13,9 +14,10 @@ class RegisterServer {
         $this->addNewUserToDatabase($user);
     }
     private function addNewUserToDatabase($user) {
-        $connect = $this->dc->connect();
-        $username = 'testUser';
-        $password = 'pswrd';
+        $db = new \model\DatabaseConnection();
+        $connect = $db->connect();
+        $username = $user->getUsername();
+        $password = $user->getPassword();
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $statement = $connect->prepare($sql);
         $statement->bindParam(':username', $username);

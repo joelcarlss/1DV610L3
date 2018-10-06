@@ -10,7 +10,7 @@ class RegisterController {
         $this->rs = $rs;
     }
     public function registerNewUser() {
-        $this->rs->registerNewUser('');
+        $this->rs->registerNewUser($user); // needs to be instance of user
     }
 
 }
