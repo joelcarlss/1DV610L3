@@ -12,6 +12,12 @@ class LoginView {
 	private $keep = 'LoginView::KeepMeLoggedIn';
 	private $messageId = 'LoginView::Message';
 
+	private $missingUsernameMessage = 'Username is missing';
+	private $missingPasswordMessage = 'Password is missing';
+	private $authErrorMessage = 'Wrong name or password';
+	private $logoutMessage = 'Bye bye!';
+	private $authErrorCookieMessage = 'Wrong information in cookies';
+
 	
 
 	/**

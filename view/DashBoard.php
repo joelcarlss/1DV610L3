@@ -4,6 +4,10 @@ namespace view;
 
 class DashBoard {
 
+	private $loginMessage = 'Welcome';
+	private $loginRememberMessage = 'Welcome and you will be remembered';
+	private $loginCookieMessage = 'Welcome back with cookie';
+
 	/**
 	 * Create HTTP response
 	 * @return  string with HTML

@@ -11,7 +11,9 @@ class LoginServer {
     }
     
     public function loginByUserCredentials ($user) {
-        
+        $username = $user->getUsername();
+        $password = $user->getPassword();
+        return true;
     }
 
     public function loginByCookieCredentials ($user) {
