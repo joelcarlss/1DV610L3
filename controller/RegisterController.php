@@ -9,5 +9,9 @@ class RegisterController {
     public function __construct (\model\RegisterServer $rs) {
         $this->rs = $rs;
     }
+    public function registerNewUser() {
+        echo 'Register Controller';
+        $this->rs->registerNewUser('');
+    }
 
 }

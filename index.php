@@ -15,6 +15,7 @@ require_once('model/DatabaseConnection.php');
 // CONTROLLER
 require_once('controller/Controller.php');
 require_once('controller/LoginController.php');
+require_once('controller/RegisterController.php');
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
@@ -35,6 +36,7 @@ $lc = new \controller\LoginController($v, $d, $ls, $ss);
 $rc = new \controller\RegisterController($rs);
 $c = new \controller\Controller($v, $dtv, $d, $st, $ls, $lc);
 
+$rc->registerNewUser();
 $lv = new \view\LayoutView(false, $v, $dtv, $d);
 
 $lv->render();

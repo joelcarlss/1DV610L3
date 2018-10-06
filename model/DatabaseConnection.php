@@ -16,6 +16,7 @@ namespace model;
      * @return PDO Database Connection
      */
     public function connect () {
+      echo 'DatabaseConnection';
       try {
 			 return new PDO("mysql:host=" . $this->server . ";dbname=" . $this->database . ";", $this->username, $this->password);
 		  }
