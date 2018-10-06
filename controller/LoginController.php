@@ -23,20 +23,40 @@ class LoginController {
         } else if ($this->v->isCookieData()) {
             $this->loginByCookie();
         } else if ($this->v->postIsLogin()) {
-            $this->loginByPostRequest();
+            $user = $this->getNewUserInstanceFromLoginRequestData();
+            $this->checkAndLoginByPostRequest($user);
         }
     }
     private function loginByCookie() {
 
     }
+    // REQUEST
+    private function checkAndLoginByPostRequest ($user) {
+        $this->checkUserData($user);
+        $this->loginByPostRequest();
+    }
     private function loginByPostRequest() : void {
-        $username = $this->v->getRequestUserName();
-        $password = $this->v->getRequestPassword();
-        $this->getNewUserInstance($username, $password);
+        
         $this->ls->loginByUserCredentials($user);
     }
+
+    private function checkUserData($user) {
+        if (!$this->ls->stringNotEmpty($user->getUsername())) {
+            throw new UsernameEmpty();
+        } else if (!$this->ls->stringNotEmpty($user->getPassword())) {
+            throw new PasswordEmpty();
+        }
+    }
+
+    // SESSION
     private function loginBySession() {
         $this->ss->loginBySessionData();
+    }
+
+    private function getNewUserInstanceFromLoginRequestData() : \model\User {
+        $username = $this->v->getRequestUserName();
+        $password = $this->v->getRequestPassword();
+        return $this->getNewUserInstance($username, $password);
     }
     private function getNewUserInstance($username, $password) : \model\User {
         return new \model\User($username, $password);
