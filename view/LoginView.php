@@ -71,11 +71,11 @@ class LoginView {
 	}
 	
 	
-	private function getRequestUserName() {
+	public function getRequestUserName() {
 		return $_POST[$this->name];
 	}
 
-	private function getRequestPassword() {
+	public function getRequestPassword() {
 		return $_POST[$this->password];
 	}
 	

@@ -10,7 +10,6 @@ class RegisterController {
         $this->rs = $rs;
     }
     public function registerNewUser() {
-        echo 'Register Controller';
         $this->rs->registerNewUser('');
     }
 

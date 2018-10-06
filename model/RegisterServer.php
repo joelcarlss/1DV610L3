@@ -13,7 +13,6 @@ class RegisterServer {
         $this->addNewUserToDatabase($user);
     }
     private function addNewUserToDatabase($user) {
-        echo 'Register Server';
         $connect = $this->dc->connect();
         $username = 'testUser';
         $password = 'pswrd';

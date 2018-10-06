@@ -38,7 +38,7 @@ class LoginController {
     private function loginBySession() {
         $this->ss->loginBySessionData();
     }
-    private function getNewUserIstance($username, $password) : \model\User {
+    private function getNewUserInstance($username, $password) : \model\User {
         return new \model\User($username, $password);
     }
 }
