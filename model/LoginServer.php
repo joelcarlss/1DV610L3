@@ -6,14 +6,30 @@ use Exception;
 class LoginServer {
 
 
+    private $dc;
+    public function __construct (\model\DatabaseConnection $dc) {
+        $this->dc = $dc; 
+    }
+    
     public function isLoggedIn () {
         return false;
     }
     
     public function loginByUserCredentials ($user) {
+        $connect = $this->dc->connect();
         $username = $user->getUsername();
-        $password = $user->getUsername();
-        return true;
+        $password = $user->getPassword();
+
+        $records = $connect->prepare('SELECT id,username,password FROM users WHERE username = :username');
+        $records->bindParam(':username', $username);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+
+        if (count($results) > 0 && password_verify($password, $results['password'])) {
+            return true;
+        } else {
+            throw new LoginException();
+        }
     }
 
     public function loginByCookieCredentials ($user) {

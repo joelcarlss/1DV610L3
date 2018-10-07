@@ -36,7 +36,7 @@ class SessionServer {
      */
     public function createSessionByUserData($user) {
         $_SESSION['userId'] = $user->getUserId();
-        $_SESSION['userName'] = $user->getUserId();
+        $_SESSION['userName'] = $user->getUsername();
     }
     /**
      * Deletes and destroys the session

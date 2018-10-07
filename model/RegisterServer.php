@@ -13,9 +13,12 @@ class RegisterServer {
     public function registerNewUser($user) {
         $this->addNewUserToDatabase($user);
     }
+    private function isUsernameAvailable($user) {
+        
+
+    }
     private function addNewUserToDatabase($user) {
-        $db = new \model\DatabaseConnection();
-        $connect = $db->connect();
+        $connect = $this->dc->connect();
         $username = $user->getUsername();
         $password = $user->getPassword();
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";

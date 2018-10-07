@@ -33,11 +33,12 @@ class LoginController {
     // REQUEST
     private function checkAndLoginByPostRequest ($user) {
         $this->checkUserData($user);
-        $this->loginByPostRequest();
+        $this->loginByPostRequest($user);
     }
-    private function loginByPostRequest() : void {
-        
-        $this->ls->loginByUserCredentials($user);
+    private function loginByPostRequest($user) : void {
+        if ($this->ls->loginByUserCredentials($user)) {
+            $this->ss->createSessionByUserData($user);
+        }
     }
 
     private function checkUserData($user) {

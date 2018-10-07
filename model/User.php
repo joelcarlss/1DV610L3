@@ -6,6 +6,7 @@ class User {
     
     private $username;
     private $password;
+    private $id;
 
     public function __construct (string $username, string $password) {
         $this->username = $username;
@@ -35,6 +36,9 @@ class User {
      */
     public function getPassword() {
         return $this->password;
+    }
+    public function setId($id) {
+        $this->id = $id;
     }
 
 }
