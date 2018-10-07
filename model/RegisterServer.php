@@ -10,14 +10,11 @@ class RegisterServer {
     public function __construct (\model\DatabaseConnection $dc) {
         $this->dc = $dc; 
     }
-    public function registerNewUser($user) {
-        $this->addNewUserToDatabase($user);
-    }
+
     private function isUsernameAvailable($user) {
         
-
     }
-    private function addNewUserToDatabase($user) {
+    public function addNewUserToDatabase($user) {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
         $password = $user->getPassword();

@@ -14,7 +14,7 @@ class RegisterController {
 
     public function handleRegister() {
         if ($this->rv->isRegisterPost()) {
-            echo 'Register Attempt';
+            
         }
     }
     public function registerNewUser() {

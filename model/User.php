@@ -37,8 +37,19 @@ class User {
     public function getPassword() {
         return $this->password;
     }
+    /**
+     * Sets id.
+     */
     public function setId($id) {
         $this->id = $id;
+    }
+    /**
+     * Compares string to user password. 
+     * If same, returns true
+     * @return bool
+     */
+    public function isStringSameAsPassword ($string) {
+        return $this->password == $string;
     }
 
 }

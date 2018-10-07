@@ -87,7 +87,7 @@ class RegisterView {
 	}
 
 	/**
-	 * Gets username value if any
+	 * Gets username value
 	 * @return string
 	 */
 	public function getRequestUserName() {
@@ -95,13 +95,19 @@ class RegisterView {
 	}
 
 	/**
-	 * Gets password value if any
+	 * Gets password value
 	 * @return string
 	 */
 	public function getRequestPassword() {
 		return $_POST[$this->password];
 	}
-    
+    /**
+	 * Gets password confirmation value
+	 * @return string
+	 */
+	public function getRequestPasswordConfirmation() {
+		return $_POST[$this->passwordConfirmation];
+	}
 
   /**
    * Checks length of string if string
