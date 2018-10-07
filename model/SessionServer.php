@@ -8,6 +8,10 @@ class SessionServer {
     
     public function loginBySessionData ($user) {
     }
+
+    public function isLoggedIn () {
+        return false;
+    }
     
     public function logOut () {
             $this->destroySession();

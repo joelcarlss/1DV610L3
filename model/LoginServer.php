@@ -11,10 +11,6 @@ class LoginServer {
         $this->dc = $dc; 
     }
     
-    public function isLoggedIn () {
-        return false;
-    }
-    
     public function loginByUserCredentials ($user) {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
@@ -26,20 +22,19 @@ class LoginServer {
         $results = $records->fetch(PDO::FETCH_ASSOC);
 
         if (count($results) > 0 && password_verify($password, $results['password'])) {
+            $user->setId($results['id']);
             return true;
         } else {
-            throw new LoginException();
+            throw new LoginValidationError();
         }
+    }
+
+    private function validateAndLoginUser ($user) {
+        
     }
 
     public function loginByCookieCredentials ($user) {
             
-    }
-    private function validateAndLoginUser ($user) {
-        
-    }
-    
-    public function logOut () {
     }
     
     private function isCorrectUsername($username) {

@@ -17,24 +17,27 @@ require_once('controller/Controller.php');
 require_once('controller/LoginController.php');
 require_once('controller/RegisterController.php');
 
-//MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
+// OPTIONS FOR SHOWING ERRORS
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-//CREATE OBJECTS OF THE VIEWS
+// STARTING SESSION
+session_start();
+
+//INSTANCES
 $v = new \view\LoginView();
 $dtv = new \view\DateTimeView();
 $d = new \view\DashBoard();
 
 $st = new \model\ServerTime();
-$ls = new \model\LoginServer();
 $ss = new \model\SessionServer();
 $dc = new \model\DatabaseConnection();
+$ls = new \model\LoginServer($dc);
 $rs = new \model\RegisterServer($dc);
 
 $lc = new \controller\LoginController($v, $d, $ls, $ss);
 $rc = new \controller\RegisterController($rs);
-$c = new \controller\Controller($v, $dtv, $d, $st, $ls, $lc);
+$c = new \controller\Controller($v, $dtv, $d, $st, $ls, $ss, $lc);
 
 
 $lv = new \view\LayoutView(false, $v, $dtv, $d);
