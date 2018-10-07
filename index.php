@@ -2,6 +2,7 @@
 
 //THE FILES NEEDED
 // VIEW
+require_once('view/RegisterView.php');
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
@@ -26,6 +27,7 @@ session_start();
 
 //INSTANCES
 $v = new \view\LoginView();
+$rv = new \view\RegisterView();
 $dtv = new \view\DateTimeView();
 $d = new \view\DashBoard();
 
@@ -36,11 +38,13 @@ $ls = new \model\LoginServer($dc);
 $rs = new \model\RegisterServer($dc);
 
 $lc = new \controller\LoginController($v, $d, $ls, $ss);
-$rc = new \controller\RegisterController($rs);
-$c = new \controller\Controller($v, $dtv, $d, $st, $ls, $ss, $lc);
+$rc = new \controller\RegisterController($rv, $rs);
+$c = new \controller\Controller($v, $dtv, $d, $st, $ls, $ss, $lc, $rc);
 
+$isRegistering = $rv->isRegistering();
+$isLoggedin = $ss->isLoggedIn();
 
-$lv = new \view\LayoutView(false, $v, $dtv, $d);
+$lv = new \view\LayoutView($isLoggedin, $isRegistering, $v, $dtv, $d, $rv);
 
 $lv->render();
 

@@ -5,16 +5,20 @@ namespace view;
 class LayoutView {
 
   private $isLoggedIn;
+  private $isRegistering;
   private $v;
   private $dtv;
   private $lv;
   private $d;
+  private $rv;
 
-  public function __construct ($isLoggedIn, \view\LoginView $v, \view\DateTimeView $dtv, \view\DashBoard $d) {
+  public function __construct (bool $isLoggedIn, bool $isRegistering, \view\LoginView $v, \view\DateTimeView $dtv, \view\DashBoard $d, \view\RegisterView $rv) {
     $this->isLoggedIn = $isLoggedIn;
+    $this->isRegistering = $isRegistering;
     $this->v = $v;
     $this->dtv = $dtv;
     $this->d = $d;
+    $this->rv = $rv;
 }
   
   public function render() {
@@ -26,7 +30,8 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this->renderIsLoggedIn($this->isLoggedIn) . '
+          ' . $this->renderRegisterLink() . '
+          ' . $this->renderIsLoggedIn() . '
           
           <div class="container">
               ' . $this->getPageToRender() . '
@@ -50,9 +55,20 @@ class LayoutView {
     $render = '';
     if ($this->isLoggedIn) {
       $render = $this->d->response();
+    } else if ($this->isRegistering) {
+      $render = $this->rv->response();
     } else {
       $render = $this->v->response();
     }
     return $render;
+  }
+  private function renderRegisterLink() {
+     if (!$this->isLoggedIn) {
+      if ($this->isRegistering) {
+        return '<a href="?">Back to login</a>';
+      } else {
+        return '<a href="?register">Register a new user</a>';
+      }
+     }
   }
 }

@@ -4,12 +4,12 @@ namespace view;
 use Exception;
 
 class RegisterView {
-	private static $registerLink = 'register';
-	private static $name = 'RegisterView::UserName';
-	private static $password = 'RegisterView::Password';
-	private static $passwordConfirmation = 'RegisterView::PasswordRepeat';
-	private static $messageId = 'RegisterView::Message';
-	private static $register = 'RegisterView::Register';
+	private $registerLink = 'register';
+	private $name = 'RegisterView::UserName';
+	private $password = 'RegisterView::Password';
+	private $passwordConfirmation = 'RegisterView::PasswordRepeat';
+	private $messageId = 'RegisterView::Message';
+	private $register = 'RegisterView::Register';
 
 	private $userName;
 	private $userPassword;
@@ -40,18 +40,18 @@ class RegisterView {
 			<form method="post" > 
 				<fieldset>
 					<legend>Register - enter Username and password</legend>
-					<p id="' . self::$messageId . '">' . $message . '</p>
+					<p id="' . $this->messageId . '">' . $message . '</p>
 					
-					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<label for="' . $this->name . '">Username :</label>
+					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="" />
 
-					<label for="' . self::$password . '">Password :</label>
-					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
+					<label for="' . $this->password . '">Password :</label>
+					<input type="password" id="' . $this->password . '" name="' . $this->password . '" />
 
-					<label for="' . self::$passwordConfirmation . '">Confirm Password :</label>
-					<input type="password" id="' . self::$passwordConfirmation . '" name="' . self::$passwordConfirmation . '" />
+					<label for="' . $this->passwordConfirmation . '">Confirm Password :</label>
+					<input type="password" id="' . $this->passwordConfirmation . '" name="' . $this->passwordConfirmation . '" />
 					
-					<input type="submit" name="' . self::$register . '" value="login" />
+					<input type="submit" name="' . $this->register . '" value="Register" />
 				</fieldset>
 			</form>
 		';
@@ -60,32 +60,19 @@ class RegisterView {
 	public function setMessage($message) {
 		$this->message = $message;
 	}
-	public function getIsRegistering() {
+	public function isRegistering() {
             if (!empty($_GET)) {
-                if(isset($_GET[self::$registerLink])) {
+                if(isset($_GET[$this->registerLink])) {
                 return true;
-            } else {
-                return false;
             }
-	    }
-	}
-
-	/**
-	 * Gets username value if any
-	 * @return string
-	 */
-	public function getRequestUserName() {
-		return $_POST[self::$name];
-	}
-
-	/**
-	 * Gets password value if any
-	 * @return string
-	 */
-	public function getRequestPassword() {
-		return $_POST[self::$password];
-	}
-	
+        }
+        return false;
+    }
+    
+    
+    public function isRegisterPost() {
+        return $this->postIsType($this->register);
+    }
 	/**
 	 * Checks if post type is similar to argument.
 	 * @return bool
@@ -98,6 +85,23 @@ class RegisterView {
 		}
 		return false;
 	}
+
+	/**
+	 * Gets username value if any
+	 * @return string
+	 */
+	public function getRequestUserName() {
+		return $_POST[$this->name];
+	}
+
+	/**
+	 * Gets password value if any
+	 * @return string
+	 */
+	public function getRequestPassword() {
+		return $_POST[$this->password];
+	}
+    
 
   /**
    * Checks length of string if string
