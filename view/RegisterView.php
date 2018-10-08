@@ -91,6 +91,7 @@ class RegisterView {
 	 * @return string
 	 */
 	public function getRequestUserName() {
+        // TODO, STRLEN Throw??
 		return $_POST[$this->name];
 	}
 
@@ -99,6 +100,7 @@ class RegisterView {
 	 * @return string
 	 */
 	public function getRequestPassword() {
+        // TODO, STRLEN Throw??
 		return $_POST[$this->password];
 	}
     /**
@@ -107,7 +109,13 @@ class RegisterView {
 	 */
 	public function getRequestPasswordConfirmation() {
 		return $_POST[$this->passwordConfirmation];
-	}
+    }
+    public function getUsernameLength () {
+        return strlen($_POST[$this->name]);
+    }
+    public function getPasswordLength () {
+        return strlen($_POST[$this->password]);
+    }
 
   /**
    * Checks length of string if string
