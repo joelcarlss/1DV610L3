@@ -17,6 +17,9 @@ class RegisterView {
 	private $minimumPasswordLength = 6;
 	private $message = '';
 
+	private $usernameLengthMessage = 'Username has too few characters, at least ' . $this->minimumNameLength . ' characters.';
+	private $passwordLengthMessage = 'Password has too few characters, at least ' . $this->minimumPasswordLength . ' characters.';
+
 
 
 	/**
@@ -86,12 +89,25 @@ class RegisterView {
 		return false;
 	}
 
+	public function getUsername () {
+
+	}
+	private function validateRequestUsername () {
+		$username = $_POST[$this->name];
+		$password = $_POST[$this->password];
+
+        if ($username < $this->minimumNameLength) {
+			throw new Exception($this->usernameLengthMessage);
+		}
+		if ($password < $this->minimumPasswordLength) {
+			throw new Exception($this->passwordLengthMessage);
+		}
+	}
 	/**
 	 * Gets username value
 	 * @return string
 	 */
-	public function getRequestUserName() {
-        // TODO, STRLEN Throw??
+	private function getRequestUserName() {
 		return $_POST[$this->name];
 	}
 
