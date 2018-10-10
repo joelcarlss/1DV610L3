@@ -12,21 +12,28 @@ class RegisterController {
         $this->rv = $rv;
         $this->rs = $rs;
     }
-
+    
     public function handleRegister() {
         if ($this->rv->isRegisterPost()) {
-            $user = $this->getNewUserWithRequestData();
-            // Check if user password is the same
+            try {
+                $user = $this->getNewUserWithRequestData();
+                $this->registerNewUser($user);
+                
+            } catch(Exception $e) {
+			    $this->rv->setMessage($e->getMessage());
+		    }
         }
     }
+
     private function getNewUserWithRequestData() {
-        $username = $this->rv->getRequestUsername();
-        $password = $this->rv->getRequestPassword();
-        
-        return new \model\User($username, $password);
-    }
-    public function registerNewUser() {
-        $this->rs->registerNewUser($user); // needs to be instance of user
+            $username = $this->rv->getUserName();
+            $password = $this->rv->getPassword();
+            if ($username && $password) {
+                return new \model\User($username, $password);
+            }
     }
 
+    public function registerNewUser($user) {
+        $this->rs->registerNewUser($user); // needs to be instance of user
+    }
 }

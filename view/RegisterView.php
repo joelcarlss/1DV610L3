@@ -17,8 +17,9 @@ class RegisterView {
 	private $minimumPasswordLength = 6;
 	private $message = '';
 
-	private $usernameLengthMessage = 'Username has too few characters, at least ' . $this->minimumNameLength . ' characters.';
-	private $passwordLengthMessage = 'Password has too few characters, at least ' . $this->minimumPasswordLength . ' characters.';
+	private $usernameLengthMessage = 'Username has too few characters, at least 3 characters.';
+	private $passwordLengthMessage = 'Password has too few characters, at least 6 characters.';
+	private $passwordMatchErrorMessage = 'Passwords do not match.';
 
 
 
@@ -61,7 +62,7 @@ class RegisterView {
 	}
 	
 	public function setMessage($message) {
-		$this->message = $message;
+		$this->message .= $message;
 	}
 	public function isRegistering() {
             if (!empty($_GET)) {
@@ -89,18 +90,25 @@ class RegisterView {
 		return false;
 	}
 
+	// GET USERNAME FUNCTIONALITY
+
+	/**
+	 * Gets username entered in post
+	 * @return string username
+	 * @throws exception if length is to short
+	 */
 	public function getUsername () {
-
-	}
-	private function validateRequestUsername () {
-		$username = $_POST[$this->name];
-		$password = $_POST[$this->password];
-
-        if ($username < $this->minimumNameLength) {
-			throw new Exception($this->usernameLengthMessage);
+		if ($this->isUsernameValid()) {
+			return $this->getRequestUserName();
 		}
-		if ($password < $this->minimumPasswordLength) {
-			throw new Exception($this->passwordLengthMessage);
+	}
+	private function isUsernameValid () {
+		$username = $_POST[$this->name];
+
+        if (strlen($username) < $this->minimumNameLength) {
+			throw new Exception($this->usernameLengthMessage);
+		} else {
+			return true;
 		}
 	}
 	/**
@@ -111,27 +119,48 @@ class RegisterView {
 		return $_POST[$this->name];
 	}
 
+	// GET PASSWORD FUNCTIONALITY
+
+	/**
+	 * Gets password entered in post
+	 * @return string password
+	 * @throws exception if length is to short
+	 */
+	public function getPassword () {
+			if ($this->isPasswordValid()) {
+				return $this->getRequestPassword();
+			}
+	}
+
+	private function isPasswordValid () {
+		$password = $_POST[$this->password];
+		$passwordConfirmation = $this->getRequestPasswordConfirmation();
+
+        if (strlen($password) < $this->minimumPasswordLength) {
+			throw new Exception($this->passwordLengthMessage);
+		} else if ($passwordConfirmation != $password) {
+			throw new Exception($this->passwordMatchErrorMessage);
+		}else {
+			return true;
+		}
+	}
+
 	/**
 	 * Gets password value
 	 * @return string
 	 */
 	public function getRequestPassword() {
-        // TODO, STRLEN Throw??
 		return $_POST[$this->password];
 	}
     /**
 	 * Gets password confirmation value
 	 * @return string
 	 */
-	public function getRequestPasswordConfirmation() {
+	private function getRequestPasswordConfirmation() {
 		return $_POST[$this->passwordConfirmation];
-    }
-    public function getUsernameLength () {
-        return strlen($_POST[$this->name]);
-    }
-    public function getPasswordLength () {
-        return strlen($_POST[$this->password]);
-    }
+	}
+	
+
 
   /**
    * Checks length of string if string
