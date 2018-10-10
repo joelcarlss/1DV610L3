@@ -27,7 +27,7 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
-	public function response() {
+	public function response() : string {
 		$message = '';
 		
 		$response = $this->generateLoginFormHTML();
@@ -40,7 +40,7 @@ class LoginView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLogoutButtonHTML() {
+	private function generateLogoutButtonHTML() : string {
 		return '
 			<form  method="post" >
 				<p id="' . $this->messageId . '">' . $this->message .'</p>
@@ -54,7 +54,7 @@ class LoginView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLoginFormHTML() {
+	private function generateLoginFormHTML() : string {
 		return '
 			<form method="post" > 
 				<fieldset>
@@ -77,7 +77,7 @@ class LoginView {
 	}
 
 
-	public function setMessage($message) {
+	public function setMessage($message) : void {
 		$this->message .= $message;
 	}
 	
@@ -87,7 +87,7 @@ class LoginView {
 	 * Checks if post type is login.
 	 * @return bool
 	 */
-	public function postIsLogin() {
+	public function postIsLogin() : bool {
 		if (!empty($_POST)) {
 			if (isset($_POST[$this->login])) { 
 				return true; 
@@ -98,11 +98,11 @@ class LoginView {
 
 	// GETS
 
-	public function getRequestStayLoggedIn () {
+	public function getRequestStayLoggedIn () : bool {
 		return isset($_POST[$this->keep]);
 	}
 
-	public function getUsername() {
+	public function getUsername() : string {
 		$username = $this->getRequestUsername();
 		if ($this->stringNotEmpty($username)) {
 			return $username;
@@ -110,11 +110,11 @@ class LoginView {
 			throw new Exception ($this->missingUsernameMessage);
 		}
 	}
-	private function getRequestUsername() {
+	private function getRequestUsername() : string {
 		return $_POST[$this->name];
 	}
 
-	public function getPassword() {
+	public function getPassword() : string {
 		$password = $this->getRequestPassword();
 		if ($this->stringNotEmpty($password)) {
 			return $password;
@@ -122,7 +122,7 @@ class LoginView {
 			throw new Exception ($this->missingPasswordMessage);
 		}
 	}
-	private function getRequestPassword() {
+	private function getRequestPassword() : string {
 		return $_POST[$this->password];
 	}
 	
@@ -130,36 +130,36 @@ class LoginView {
 	// COOKIE FUNCTIONALITY
 
 
-	public function isCookieUserData () {
+	public function isCookieUserData () : bool {
 		return (isset($_COOKIE[$this->cookieName]) && isset($_COOKIE[$this->cookiePassword]));
 	}
 
 	/**
 	 * Creates cookie to store userdata.
 	 */
-	public function createCookieByUserData ($user) {
+	public function createCookieByUserData ($user) : void {
 		setcookie($this->cookieName, $user->getUsername(), time() + (86400 * 30), "/");
 		setcookie($this->cookiePassword, $user->getHashedPassword(), time() + (86400 * 30), "/");
 	}
 	/**
 	 * Clears data in cookie and changes time to expired
 	 */
-	public function clearUserDataCookie () {
+	public function clearUserDataCookie () : void {
 			setcookie($this->cookieName, '', time()-3600);
 			setcookie($this->cookiePassword, '', time()-3600);
 	}
 
-	public function getCookieUsername() {
+	public function getCookieUsername() : string {
 		return $_COOKIE[$this->cookieName];
 	}
 
-	public function getCookiePassword() {
+	public function getCookiePassword() : string {
 		return $_COOKIE[$this->cookiePassword];
 	}
 
 	// Low-level functionality 
 
-	private function stringNotEmpty ($string) {
+	private function stringNotEmpty ($string) : bool {
         return (strlen($string) > 0);
     }
 }

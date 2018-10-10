@@ -20,11 +20,11 @@ class LoginController {
         $this->cc = $cc;
     }
     
-    public function isLoginAttempt () {
+    public function isLoginAttempt () : bool {
         return $this->v->postIsLogin();
     }
     
-    public function handleLogin () {
+    public function handleLogin () : void {
         try {
             $user = $this->getNewUserInstanceFromLoginRequestData();
             $this->loginByPostRequest($user);

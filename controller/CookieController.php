@@ -17,13 +17,13 @@ class CookieController {
         $this->ls = $ls;
         $this->ss = $ss;
     }
-    public function isCookieData() {
+    public function isCookieData() : bool {
         return $this->v->isCookieUserData();
     }
-    public function createLoginCookie($postRequestUser) {
+    public function createLoginCookie($postRequestUser) : void {
         $this->v->createCookieByUserData($postRequestUser);
     }
-    public function handleCookieLogin () {
+    public function handleCookieLogin () : void {
         $user = $this->getNewUserInstanceFromCookieData();
         $this->loginByCookieData($user);
     }

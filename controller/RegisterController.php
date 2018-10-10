@@ -12,10 +12,10 @@ class RegisterController {
         $this->rv = $rv;
         $this->rs = $rs;
     }
-    public function isRegisterAttempt () {
+    public function isRegisterAttempt () : bool {
         return $this->rv->isRegisterPost();
     }
-    public function handleRegister() {
+    public function handleRegister() : void {
         try {
             $user = $this->getNewUserWithRequestData();
             $this->registerNewUser($user);
@@ -25,7 +25,7 @@ class RegisterController {
         }
     }
 
-    private function getNewUserWithRequestData() {
+    private function getNewUserWithRequestData() : \model\User {
             $username = $this->rv->getUserName();
             $password = $this->rv->getPassword();
             if ($username && $password) {
@@ -33,7 +33,7 @@ class RegisterController {
             }
     }
 
-    public function registerNewUser($user) {
+    public function registerNewUser($user) : void {
         $this->rs->registerNewUser($user); // needs to be instance of user
     }
 }

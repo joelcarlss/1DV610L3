@@ -11,7 +11,7 @@ class LoginServer {
         $this->dc = $dc; 
     }
     
-    public function loginByUserCredentials ($user) {
+    public function loginByUserCredentials ($user) : bool {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
         $password = $user->getPassword();
@@ -21,6 +21,7 @@ class LoginServer {
         $records->execute();
         $result = $records->fetch(\PDO::FETCH_ASSOC);
 
+        // TODO FIX PROBLEM WITH VALIDATION OF HASHED COOKIE STRING
         if ($result && password_verify($password, $result['password'])) {
             $user->setId($result['id']);
             return true;

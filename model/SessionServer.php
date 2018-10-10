@@ -9,11 +9,11 @@ class SessionServer {
     public function loginBySessionData ($user) {
     }
 
-    public function isLoggedIn () {
+    public function isLoggedIn () : bool {
         return $this->isSession();
     }
     
-    public function logOut () {
+    public function logOut () : void {
             $this->destroySession();
     }
     
@@ -31,21 +31,21 @@ class SessionServer {
      * Checks if Session data exists
      * @return bool
      */
-    private function isSession () {
+    private function isSession () : bool {
         return !empty($_SESSION);
     }
 
     /**
      * Gives $_SESSION necessary data from user instance
      */
-    public function createSessionByUserData($user) {
+    public function createSessionByUserData($user) : void {
         $_SESSION['userId'] = $user->getId();
         $_SESSION['userName'] = $user->getUsername();
     }
     /**
      * Deletes and destroys the session
      */
-    private function destroySession () {
+    private function destroySession () : void {
         unset($_SESSION);
         session_destroy();
     }

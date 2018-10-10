@@ -17,7 +17,7 @@ class User {
      * Hashes string
      * @return string
      */
-    public function getHashedPassword () {
+    public function getHashedPassword () : string {
         return password_hash($this->password, PASSWORD_DEFAULT);
 
     }
@@ -26,7 +26,7 @@ class User {
      * Get private value of $username
      * @return string
      */
-    public function getUsername() {
+    public function getUsername() : string {
         return $this->username;
     }
 
@@ -34,7 +34,7 @@ class User {
      * Get private value of $password
      * @return string
      */
-    public function getPassword() {
+    public function getPassword() : string {
         return $this->password;
     }
     public function getId() {
@@ -43,16 +43,8 @@ class User {
     /**
      * Sets id.
      */
-    public function setId($id) {
+    public function setId($id) : void {
         $this->id = $id;
-    }
-    /**
-     * Compares string to user password. 
-     * If same, returns true
-     * @return bool
-     */
-    public function isStringSameAsPassword ($string) {
-        return $this->password == $string;
     }
 
 }

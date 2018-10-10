@@ -17,7 +17,7 @@ class DashBoard {
 	 * Create HTTP response
 	 * @return  string with HTML
 	 */
-	public function response() {
+	public function response() : string {
 		
 		$response = $this->generateLogoutButtonHTML();
 		return $response;
@@ -28,7 +28,7 @@ class DashBoard {
 	* @param $message, String output message
 	* @return string with HTML
 	*/
-	private function generateLogoutButtonHTML() {
+	private function generateLogoutButtonHTML() : string {
 		return '
 			<form  method="post" >
 				<p id="' . $this->messageId . '">' . $this->message .'</p>
@@ -37,7 +37,7 @@ class DashBoard {
 		';
 	}
 
-	public function isLogOutAttempt() {
+	public function isLogOutAttempt() : bool {
 		if (!empty($_POST)) {
 			if (isset($_POST[$this->logout])) { 
 				return true; 

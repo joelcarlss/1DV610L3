@@ -28,7 +28,7 @@ class RegisterView {
 	 * Creates a HTTP-Response for register page.
 	 * @return string 
 	 */
-	public function response() {
+	public function response() : string {
 		
 		$response = $this->generateLRegisterFormHTML($this->message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -40,7 +40,7 @@ class RegisterView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLRegisterFormHTML($message) {
+	private function generateLRegisterFormHTML($message) : string {
 		return '
 			<form method="post" > 
 				<fieldset>
@@ -62,10 +62,10 @@ class RegisterView {
 		';
 	}
 	
-	public function setMessage($message) {
+	public function setMessage($message) : void {
 		$this->message .= $message;
 	}
-	public function isRegistering() {
+	public function isRegistering() : bool {
             if (!empty($_GET)) {
                 if(isset($_GET[$this->registerLink])) {
                 return true;
@@ -75,14 +75,14 @@ class RegisterView {
     }
     
     
-    public function isRegisterPost() {
+    public function isRegisterPost() : bool {
         return $this->postIsType($this->register);
     }
 	/**
 	 * Checks if post type is similar to argument.
 	 * @return bool
 	 */
-	private function postIsType($type) {
+	private function postIsType($type) : bool {
 		if (!empty($_POST)) {
 			if (isset($_POST[$type])) { 
 				return true; 
@@ -98,12 +98,12 @@ class RegisterView {
 	 * @return string username
 	 * @throws exception if length is to short
 	 */
-	public function getUsername () {
+	public function getUsername () : string {
 		if ($this->isUsernameValid()) {
 			return $this->getRequestUserName();
 		}
 	}
-	private function isUsernameValid () {
+	private function isUsernameValid () : bool {
 		$username = $_POST[$this->name];
 
         if (strlen($username) < $this->minimumNameLength) {
@@ -116,7 +116,7 @@ class RegisterView {
 	 * Gets username value
 	 * @return string
 	 */
-	private function getRequestUserName() {
+	private function getRequestUserName() : string {
 		return $_POST[$this->name];
 	}
 
@@ -127,13 +127,13 @@ class RegisterView {
 	 * @return string password
 	 * @throws exception if length is to short
 	 */
-	public function getPassword () {
+	public function getPassword () : string {
 			if ($this->isPasswordValid()) {
 				return $this->getRequestPassword();
 			}
 	}
 
-	private function isPasswordValid () {
+	private function isPasswordValid () : bool {
 		$password = $_POST[$this->password];
 		$passwordConfirmation = $this->getRequestPasswordConfirmation();
 
@@ -150,14 +150,14 @@ class RegisterView {
 	 * Gets password value
 	 * @return string
 	 */
-	public function getRequestPassword() {
+	public function getRequestPassword() : string {
 		return $_POST[$this->password];
 	}
     /**
 	 * Gets password confirmation value
 	 * @return string
 	 */
-	private function getRequestPasswordConfirmation() {
+	private function getRequestPasswordConfirmation() : string {
 		return $_POST[$this->passwordConfirmation];
 	}
 	
@@ -167,7 +167,7 @@ class RegisterView {
    * Checks length of string if string
    * @return integer length of string
    */
-  private function checkStringLength ($string) {
+  private function checkStringLength ($string) : int {
     if (is_string($string)) {
       return count($string);
     }

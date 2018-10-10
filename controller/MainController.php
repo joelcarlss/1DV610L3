@@ -42,7 +42,7 @@ class MainController {
         $this->start();
     }
 
-    private function start () {
+    private function start () : void {
         $this->setTime();
         if ($this->ss->isLoggedIn()) {
             //Session
@@ -58,11 +58,11 @@ class MainController {
             $this->ss->logOut();
         }
     }
-    private function setTime() {
+    private function setTime() : void {
         $time = $this->st->getCurrentServerTime();
         $this->dtv->setTime($time);
     }
-    private function handleLogin () {
+    private function handleLogin () : void {
         $this->lc->handleLogin();
     }
 }
