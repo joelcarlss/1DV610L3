@@ -43,12 +43,13 @@ class MainController {
         $this->setTime();
         if ($this->ss->isLoggedIn()) {
             //Session
-        } else if ($this->v->postIsLogin()) {
+        } else if ($this->lc->isLoginAttempt()) {
             $this->lc->handleLogin();
-        } else if ($this->rv->isRegisterPost()) {
+        } else if ($this->rc->isRegisterAttempt()) {
             $this->rc->handleRegister();
         } else if ($this->v->isCookieData()) {
             // Do Cookie
+            echo 'COOKIE FOUND';
         }
          if ($this->d->isLogOutAttempt()) {
             $this->ss->logOut();

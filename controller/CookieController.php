@@ -17,6 +17,9 @@ class CookieController {
         $this->ls = $ls;
         $this->ss = $ss;
     }
+    public function isCookieData() {
+        $this->v->isCookieUserData();
+    }
     private function loginByCookie() {
         
     }

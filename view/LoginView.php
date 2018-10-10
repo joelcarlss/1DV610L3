@@ -111,7 +111,19 @@ class LoginView {
 		}
 	}
 
-	public function isCookieData () {
-        return false;
-    }
+	public function isCookieUserData () {
+		return (isset($_COOKIE[self::$cookieName]) && isset($_COOKIE[self::$cookiePassword]));
+	}
+
+	/**
+	 * Creates cookie to store userdata.
+	 */
+	public function createCookieByUserData ($user) {
+		setcookie(self::$cookieName, $user->getUsername(), time() + (86400 * 30), "/");
+		setcookie(self::$cookiePassword, $user->getPassword(), time() + (86400 * 30), "/");
+	}
+	public function clearUserDataCookies () {
+			setcookie(self::$cookieName, '', time()-3600);
+			setcookie(self::$cookiePassword, '', time()-3600);
+	}
 }

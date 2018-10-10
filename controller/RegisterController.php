@@ -12,16 +12,16 @@ class RegisterController {
         $this->rv = $rv;
         $this->rs = $rs;
     }
-    
+    public function isRegisterAttempt () {
+        return $this->rv->isRegisterPost();
+    }
     public function handleRegister() {
-        if ($this->rv->isRegisterPost()) {
-            try {
-                $user = $this->getNewUserWithRequestData();
-                $this->registerNewUser($user);
-                
-            } catch(Exception $e) {
-			    $this->rv->setMessage($e->getMessage());
-		    }
+        try {
+            $user = $this->getNewUserWithRequestData();
+            $this->registerNewUser($user);
+            
+        } catch(Exception $e) {
+            $this->rv->setMessage($e->getMessage());
         }
     }
 

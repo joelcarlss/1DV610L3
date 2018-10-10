@@ -17,6 +17,11 @@ class LoginController {
         $this->ls = $ls;
         $this->ss = $ss;
     }
+    
+    public function isLoginAttempt () {
+        return $this->v->postIsLogin();
+    }
+    
     public function handleLogin () {
         $user = $this->getNewUserInstanceFromLoginRequestData();
         $this->checkAndLoginByPostRequest($user);
@@ -26,6 +31,7 @@ class LoginController {
         $this->checkUserData($user);
         $this->loginByPostRequest($user);
     }
+    
     private function loginByPostRequest($user) : void {
         if ($this->ls->loginByUserCredentials($user)) {
             $this->ss->createSessionByUserData($user);
@@ -39,12 +45,13 @@ class LoginController {
             throw new PasswordEmpty();
         }
     }
-    
+
     private function getNewUserInstanceFromLoginRequestData() : \model\User {
         $username = $this->v->getRequestUserName();
         $password = $this->v->getRequestPassword();
         return $this->getNewUserInstance($username, $password);
     }
+    
     private function getNewUserInstance($username, $password) : \model\User {
         return new \model\User($username, $password);
     }
