@@ -32,5 +32,9 @@ class DashBoard {
 			</form>
 		';
 	}
+
+	public function isLogOutAttempt() {
+		return false;
+	}
 	
 }

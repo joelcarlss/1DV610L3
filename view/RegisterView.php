@@ -20,6 +20,7 @@ class RegisterView {
 	private $usernameLengthMessage = 'Username has too few characters, at least 3 characters.';
 	private $passwordLengthMessage = 'Password has too few characters, at least 6 characters.';
 	private $passwordMatchErrorMessage = 'Passwords do not match.';
+	private $usernameNotAvailableMessage = 'Username not available.';
 
 
 

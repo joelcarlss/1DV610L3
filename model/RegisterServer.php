@@ -1,19 +1,22 @@
 <?php
 namespace model;
-require_once('model/DatabaseConnection.php');
 
 use Exception;
 
 class RegisterServer {
 
     private $dc;
+    private $conn;
     public function __construct (\model\DatabaseConnection $dc) {
         $this->dc = $dc; 
+        $this->conn = $dc->connect();
     }
 
     public function registerNewUser($user) {
         if ($this->isUsernameAvailable($user)) {
-
+            $this->addNewUserToDatabase($user);
+        } else {
+            throw new Exception('User exists, pick another username.');
         }
     }
     private function isUsernameAvailable($user) {
@@ -23,18 +26,19 @@ class RegisterServer {
         $records = $connect->prepare('SELECT id,username,password FROM users WHERE username = :username');
         $records->bindParam(':username', $username);
         $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
+        $results = $records->fetch(\PDO::FETCH_ASSOC);
 
-        return (!count($results) > 0);
+        return !$results;
     }
-    public function addNewUserToDatabase($user) {
+    private function addNewUserToDatabase($user) {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
-        $password = $user->getPassword();
+        $password = $user->getHashedPassword();
         $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
         $statement = $connect->prepare($sql);
         $statement->bindParam(':username', $username);
         $statement->bindParam(':password', $password);
+        echo '2';
 
         if ($statement->execute()) {
             die ('Success');

@@ -18,17 +18,11 @@ class LoginController {
         $this->ss = $ss;
     }
     public function handleLogin () {
-        if ($this->ss->isSession()) {
-            $this->loginBySession();
-        } else if ($this->v->isCookieData()) {
-            $this->loginByCookie();
-        } else if ($this->v->postIsLogin()) {
-            $user = $this->getNewUserInstanceFromLoginRequestData();
-            $this->checkAndLoginByPostRequest($user);
-        }
+        $user = $this->getNewUserInstanceFromLoginRequestData();
+        $this->checkAndLoginByPostRequest($user);
     }
     private function loginByCookie() {
-
+        
     }
     // REQUEST
     private function checkAndLoginByPostRequest ($user) {

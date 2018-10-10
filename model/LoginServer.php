@@ -19,9 +19,9 @@ class LoginServer {
         $records = $connect->prepare('SELECT id,username,password FROM users WHERE username = :username');
         $records->bindParam(':username', $username);
         $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
+        $results = $records->fetch(\PDO::FETCH_ASSOC);
 
-        if (count($results) > 0 && password_verify($password, $results['password'])) {
+        if ($results && password_verify($password, $results['password'])) {
             $user->setId($results['id']);
             return true;
         } else {

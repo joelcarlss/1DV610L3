@@ -14,7 +14,7 @@ require_once('model/SessionServer.php');
 require_once('model/RegisterServer.php');
 require_once('model/DatabaseConnection.php');
 // CONTROLLER
-require_once('controller/Controller.php');
+require_once('controller/MainController.php');
 require_once('controller/LoginController.php');
 require_once('controller/RegisterController.php');
 
@@ -39,7 +39,7 @@ $rs = new \model\RegisterServer($dc);
 
 $lc = new \controller\LoginController($v, $d, $ls, $ss);
 $rc = new \controller\RegisterController($rv, $rs);
-$c = new \controller\Controller($v, $dtv, $d, $st, $ls, $ss, $lc, $rc);
+$mc = new \controller\MainController($v, $dtv, $d, $rv, $st, $ls, $ss, $lc, $rc);
 
 $isRegistering = $rv->isRegistering();
 $isLoggedin = $ss->isLoggedIn();
