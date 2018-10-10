@@ -4,7 +4,7 @@ namespace controller;
 use Exception;
 
 require_once('model/User.php');
-class LoginController {
+class CookieController {
     
     private $v;
     private $d;
@@ -17,16 +17,15 @@ class LoginController {
         $this->ls = $ls;
         $this->ss = $ss;
     }
-    public function handleLogin () {
-        $user = $this->getNewUserInstanceFromLoginRequestData();
-        $this->checkAndLoginByPostRequest($user);
+    private function loginByCookie() {
+        
     }
-
-    private function checkAndLoginByPostRequest ($user) {
+    // REQUEST
+    private function checkAndLogin ($user) {
         $this->checkUserData($user);
         $this->loginByPostRequest($user);
     }
-    private function loginByPostRequest($user) : void {
+    private function login($user) : void {
         if ($this->ls->loginByUserCredentials($user)) {
             $this->ss->createSessionByUserData($user);
         }
@@ -39,7 +38,7 @@ class LoginController {
             throw new PasswordEmpty();
         }
     }
-    
+
     private function getNewUserInstanceFromLoginRequestData() : \model\User {
         $username = $this->v->getRequestUserName();
         $password = $this->v->getRequestPassword();

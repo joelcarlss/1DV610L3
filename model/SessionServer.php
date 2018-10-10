@@ -10,7 +10,7 @@ class SessionServer {
     }
 
     public function isLoggedIn () {
-        return false;
+        return $this->isSession();
     }
     
     public function logOut () {
@@ -31,7 +31,7 @@ class SessionServer {
      * Checks if Session data exists
      * @return bool
      */
-    public function isSession () {
+    private function isSession () {
         return !empty($_SESSION);
     }
 
@@ -39,7 +39,7 @@ class SessionServer {
      * Gives $_SESSION necessary data from user instance
      */
     public function createSessionByUserData($user) {
-        $_SESSION['userId'] = $user->getUserId();
+        $_SESSION['userId'] = $user->getId();
         $_SESSION['userName'] = $user->getUsername();
     }
     /**

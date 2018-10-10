@@ -37,6 +37,9 @@ class User {
     public function getPassword() {
         return $this->password;
     }
+    public function getId() {
+        return $this->id;
+    }
     /**
      * Sets id.
      */

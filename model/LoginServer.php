@@ -32,10 +32,6 @@ class LoginServer {
     private function validateAndLoginUser ($user) {
         
     }
-
-    public function loginByCookieCredentials ($user) {
-            
-    }
     
     private function isCorrectUsername($username) {
     }

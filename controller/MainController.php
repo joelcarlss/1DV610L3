@@ -41,7 +41,7 @@ class MainController {
 
     private function start () {
         $this->setTime();
-        if ($this->ss->isSession()) {
+        if ($this->ss->isLoggedIn()) {
             //Session
         } else if ($this->v->postIsLogin()) {
             $this->lc->handleLogin();
