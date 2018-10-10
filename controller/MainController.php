@@ -49,8 +49,9 @@ class MainController {
             $this->rc->handleRegister();
         } else if ($this->v->isCookieData()) {
             // Do Cookie
-        } else if ($this->d->isLogOutAttempt()) {
-            $this->ls-logOut();
+        }
+         if ($this->d->isLogOutAttempt()) {
+            $this->ss->logOut();
         }
     }
     private function setTime() {

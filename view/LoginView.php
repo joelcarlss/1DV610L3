@@ -4,7 +4,6 @@ namespace view;
 
 class LoginView {
 	private $login = 'LoginView::Login';
-	private $logout = 'LoginView::Logout';
 	private $name = 'LoginView::UserName';
 	private $password = 'LoginView::Password';
 	private $cookieName = 'LoginView::CookieName';

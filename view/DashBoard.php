@@ -4,18 +4,22 @@ namespace view;
 
 class DashBoard {
 
+
+	private $messageId = 'LoginView::Message';
+	private $logout = 'LoginView::Logout';
+
 	private $loginMessage = 'Welcome';
 	private $loginRememberMessage = 'Welcome and you will be remembered';
 	private $loginCookieMessage = 'Welcome back with cookie';
 
+	private $message = '';
 	/**
 	 * Create HTTP response
 	 * @return  string with HTML
 	 */
 	public function response() {
-		$message = '';
 		
-		$response = $this->generateLogoutButtonHTML($message);
+		$response = $this->generateLogoutButtonHTML();
 		return $response;
 	}
 
@@ -24,16 +28,21 @@ class DashBoard {
 	* @param $message, String output message
 	* @return string with HTML
 	*/
-	private function generateLogoutButtonHTML($message) {
+	private function generateLogoutButtonHTML() {
 		return '
 			<form  method="post" >
-				<p id="' . self::$messageId . '">' . $message .'</p>
-				<input type="submit" name="' . self::$logout . '" value="logout"/>
+				<p id="' . $this->messageId . '">' . $this->message .'</p>
+				<input type="submit" name="' . $this->logout . '" value="logout"/>
 			</form>
 		';
 	}
 
 	public function isLogOutAttempt() {
+		if (!empty($_POST)) {
+			if (isset($_POST[$this->logout])) { 
+				return true; 
+			}
+		}
 		return false;
 	}
 	
