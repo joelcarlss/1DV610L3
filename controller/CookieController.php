@@ -23,32 +23,20 @@ class CookieController {
     public function createLoginCookie($postRequestUser) {
         $this->v->createCookieByUserData($postRequestUser);
     }
-    private function handleCookieLogin () {
-        $user = getNewUserInstanceFromCookieData();
-        $this->checkAndLogin($user);
-    }
-    // REQUEST
-    private function checkAndLogin ($user) {
-        $this->checkCookieData($user);
+    public function handleCookieLogin () {
+        $user = $this->getNewUserInstanceFromCookieData();
         $this->loginByCookieData($user);
     }
-    private function login($user) : void {
+
+    private function loginByCookieData($user) : void {
         if ($this->ls->loginByUserCredentials($user)) {
             $this->ss->createSessionByUserData($user);
         }
     }
 
-    private function checkCookieData($user) {
-        if (!$this->ls->stringNotEmpty($user->getUsername())) {
-            throw new UsernameEmpty();
-        } else if (!$this->ls->stringNotEmpty($user->getPassword())) {
-            throw new PasswordEmpty();
-        }
-    }
-
     private function getNewUserInstanceFromCookieData() : \model\User {
-        $username = $this->v->getRequestUserName();
-        $password = $this->v->getRequestPassword();
+        $username = $this->v->getCookieUsername();
+        $password = $this->v->getCookiePassword();
         return $this->getNewUserInstance($username, $password);
     }
     private function getNewUserInstance($username, $password) : \model\User {

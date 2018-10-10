@@ -19,23 +19,17 @@ class LoginServer {
         $records = $connect->prepare('SELECT id,username,password FROM users WHERE username = :username');
         $records->bindParam(':username', $username);
         $records->execute();
-        $results = $records->fetch(\PDO::FETCH_ASSOC);
+        $result = $records->fetch(\PDO::FETCH_ASSOC);
 
-        if ($results && password_verify($password, $results['password'])) {
-            $user->setId($results['id']);
+        if ($result && password_verify($password, $result['password'])) {
+            $user->setId($result['id']);
+            return true;
+        } else if ($result && hash_equals($password, $result['password'])) {
+            $user->setId($result['id']);
             return true;
         } else {
             throw new LoginValidationError();
         }
     }
 
-    private function validateAndLoginUser ($user) {
-        
-    }
-    
-    private function isCorrectUsername($username) {
-    }
-
-    private function isCorrectPassword($password) {
-    }
 }

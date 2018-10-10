@@ -149,7 +149,15 @@ class LoginView {
 			setcookie($this->cookiePassword, '', time()-3600);
 	}
 
-	// 
+	public function getCookieUsername() {
+		return $_COOKIE[$this->cookieName];
+	}
+
+	public function getCookiePassword() {
+		return $_COOKIE[$this->cookiePassword];
+	}
+
+	// Low-level functionality 
 
 	private function stringNotEmpty ($string) {
         return (strlen($string) > 0);
