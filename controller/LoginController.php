@@ -25,16 +25,15 @@ class LoginController {
     }
     
     public function handleLogin () {
-        $user = $this->getNewUserInstanceFromLoginRequestData();
-        $this->checkAndLoginByPostRequest($user);
-        if ($this->v->getRequestStayLoggedIn()) {
-            $this->cc->createLoginCookie($user);
+        try {
+            $user = $this->getNewUserInstanceFromLoginRequestData();
+            $this->loginByPostRequest($user);
+            if ($this->v->getRequestStayLoggedIn()) {
+                $this->cc->createLoginCookie($user);
+            }
+        } catch (Exception $e) {
+            $this->v->setMessage($e->getMessage());
         }
-    }
-
-    private function checkAndLoginByPostRequest ($user) {
-        $this->checkUserData($user);
-        $this->loginByPostRequest($user);
     }
     
     private function loginByPostRequest($user) : void {
@@ -43,17 +42,9 @@ class LoginController {
         }
     }
 
-    private function checkUserData($user) {
-        if (!$this->ls->stringNotEmpty($user->getUsername())) {
-            throw new UsernameEmpty();
-        } else if (!$this->ls->stringNotEmpty($user->getPassword())) {
-            throw new PasswordEmpty();
-        }
-    }
-
     private function getNewUserInstanceFromLoginRequestData() : \model\User {
-        $username = $this->v->getRequestUserName();
-        $password = $this->v->getRequestPassword();
+        $username = $this->v->getUsername();
+        $password = $this->v->getPassword();
         return $this->getNewUserInstance($username, $password);
     }
     

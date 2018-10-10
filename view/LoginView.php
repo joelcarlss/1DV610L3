@@ -1,6 +1,7 @@
 <?php
 
 namespace view;
+use Exception;
 
 class LoginView {
 	private $login = 'LoginView::Login';
@@ -16,6 +17,8 @@ class LoginView {
 	private $authErrorMessage = 'Wrong name or password';
 	private $logoutMessage = 'Bye bye!';
 	private $authErrorCookieMessage = 'Wrong information in cookies';
+
+	private $message = '';
 	
 	/**
 	 * Create HTTP response
@@ -27,7 +30,7 @@ class LoginView {
 	public function response() {
 		$message = '';
 		
-		$response = $this->generateLoginFormHTML($message);
+		$response = $this->generateLoginFormHTML();
 		//$response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
@@ -37,10 +40,10 @@ class LoginView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLogoutButtonHTML($message) {
+	private function generateLogoutButtonHTML() {
 		return '
 			<form  method="post" >
-				<p id="' . $this->messageId . '">' . $message .'</p>
+				<p id="' . $this->messageId . '">' . $this->message .'</p>
 				<input type="submit" name="' . $this->logout . '" value="logout"/>
 			</form>
 		';
@@ -51,12 +54,12 @@ class LoginView {
 	* @param $message, String output message
 	* @return  void, BUT writes to standard output!
 	*/
-	private function generateLoginFormHTML($message) {
+	private function generateLoginFormHTML() {
 		return '
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
-					<p id="' . $this->messageId . '">' . $message . '</p>
+					<p id="' . $this->messageId . '">' . $this->message . '</p>
 					
 					<label for="' . $this->name . '">Username :</label>
 					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="" />
@@ -72,6 +75,11 @@ class LoginView {
 			</form>
 		';
 	}
+
+
+	public function setMessage($message) {
+		$this->message .= $message;
+	}
 	
 	// POST REQUEST FUNCTIONALITY
 
@@ -81,7 +89,7 @@ class LoginView {
 	 */
 	public function postIsLogin() {
 		if (!empty($_POST)) {
-			if (isset($_POST[$type])) { 
+			if (isset($_POST[$this->login])) { 
 				return true; 
 			}
 		}
@@ -93,11 +101,28 @@ class LoginView {
 	public function getRequestStayLoggedIn () {
 		return isset($_POST[$this->keep]);
 	}
-	public function getRequestUserName() {
+
+	public function getUsername() {
+		$username = $this->getRequestUsername();
+		if ($this->stringNotEmpty($username)) {
+			return $username;
+		} else {
+			throw new Exception ($this->missingUsernameMessage);
+		}
+	}
+	private function getRequestUsername() {
 		return $_POST[$this->name];
 	}
 
-	public function getRequestPassword() {
+	public function getPassword() {
+		$password = $this->getRequestPassword();
+		if ($this->stringNotEmpty($password)) {
+			return $password;
+		} else {
+			throw new Exception ($this->missingPasswordMessage);
+		}
+	}
+	private function getRequestPassword() {
 		return $_POST[$this->password];
 	}
 	
@@ -123,4 +148,10 @@ class LoginView {
 			setcookie($this->cookieName, '', time()-3600);
 			setcookie($this->cookiePassword, '', time()-3600);
 	}
+
+	// 
+
+	private function stringNotEmpty ($string) {
+        return (strlen($string) > 0);
+    }
 }
