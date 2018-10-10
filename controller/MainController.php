@@ -12,6 +12,7 @@ class MainController {
     private $ls;
     private $ss;
     private $lc;
+    private $cc;
     private $rc;
     
     public function __construct (
@@ -25,6 +26,7 @@ class MainController {
     \model\SessionServer $ss,
 
     \controller\LoginController $lc, 
+    \controller\CookieController $cc,
     \controller\RegisterController $rc) {
 
         $this->v = $v;
@@ -35,6 +37,7 @@ class MainController {
         $this->d = $d;
         $this->ss = $ss;
         $this->lc = $lc;
+        $this->cc = $cc;
         $this->rc = $rc;
         $this->start();
     }
@@ -44,13 +47,13 @@ class MainController {
         if ($this->ss->isLoggedIn()) {
             //Session
         } else if ($this->lc->isLoginAttempt()) {
-            $this->lc->handleLogin();
+            $this->handleLogin();
         } else if ($this->rc->isRegisterAttempt()) {
             $this->rc->handleRegister();
-        } else if ($this->v->isCookieData()) {
-            // Do Cookie
-            echo 'COOKIE FOUND';
+        } else if ($this->cc->isCookieData()) {
+            $this->cc->handleCookieLogin();
         }
+        // TODO Remove dependency to DashBoard
          if ($this->d->isLogOutAttempt()) {
             $this->ss->logOut();
         }
@@ -58,5 +61,8 @@ class MainController {
     private function setTime() {
         $time = $this->st->getCurrentServerTime();
         $this->dtv->setTime($time);
+    }
+    private function handleLogin () {
+        $this->lc->handleLogin();
     }
 }

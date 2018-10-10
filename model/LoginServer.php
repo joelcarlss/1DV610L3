@@ -38,11 +38,4 @@ class LoginServer {
 
     private function isCorrectPassword($password) {
     }
-
-    public function hashPasswordString ($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
-    }
-    public function stringNotEmpty ($string) {
-        return (strlen($string) > 0);
-    }
 }

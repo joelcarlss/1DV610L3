@@ -10,12 +10,14 @@ class LoginController {
     private $d;
     private $ls;
     private $ss;
+    private $cc;
     
-    public function __construct (\view\LoginView $v, \view\DashBoard $d, \model\LoginServer $ls, \model\SessionServer $ss) {
+    public function __construct (\view\LoginView $v, \view\DashBoard $d, \model\LoginServer $ls, \model\SessionServer $ss, CookieController $cc) {
         $this->v = $v;
         $this->d = $d;
         $this->ls = $ls;
         $this->ss = $ss;
+        $this->cc = $cc;
     }
     
     public function isLoginAttempt () {
@@ -25,6 +27,9 @@ class LoginController {
     public function handleLogin () {
         $user = $this->getNewUserInstanceFromLoginRequestData();
         $this->checkAndLoginByPostRequest($user);
+        if ($this->v->getRequestStayLoggedIn()) {
+            $this->cc->createLoginCookie($user);
+        }
     }
 
     private function checkAndLoginByPostRequest ($user) {

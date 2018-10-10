@@ -73,24 +73,13 @@ class LoginView {
 		';
 	}
 	
-	
-	public function getRequestUserName() {
-		return $_POST[$this->name];
-	}
-
-	public function getRequestPassword() {
-		return $_POST[$this->password];
-	}
-	
-	public function postIsLogin() {
-		return $this->postIsType($this->login);
-	}
+	// POST REQUEST FUNCTIONALITY
 
 	/**
-	 * Checks if post type is similar to argument.
+	 * Checks if post type is login.
 	 * @return bool
 	 */
-	private function postIsType($type) {
+	public function postIsLogin() {
 		if (!empty($_POST)) {
 			if (isset($_POST[$type])) { 
 				return true; 
@@ -99,31 +88,39 @@ class LoginView {
 		return false;
 	}
 
-	/**
-	 * Checks if string contains data. (Length is larger than 0)
-	 * @return bool
-	 */
-	public function stringGotData($string) {
-		if (strlen($string) > 0) {
-			return true;
-		} else {
-			return false;
-		}
+	// GETS
+
+	public function getRequestStayLoggedIn () {
+		return isset($_POST[$this->keep]);
+	}
+	public function getRequestUserName() {
+		return $_POST[$this->name];
 	}
 
+	public function getRequestPassword() {
+		return $_POST[$this->password];
+	}
+	
+
+	// COOKIE FUNCTIONALITY
+
+
 	public function isCookieUserData () {
-		return (isset($_COOKIE[self::$cookieName]) && isset($_COOKIE[self::$cookiePassword]));
+		return (isset($_COOKIE[$this->cookieName]) && isset($_COOKIE[$this->cookiePassword]));
 	}
 
 	/**
 	 * Creates cookie to store userdata.
 	 */
 	public function createCookieByUserData ($user) {
-		setcookie(self::$cookieName, $user->getUsername(), time() + (86400 * 30), "/");
-		setcookie(self::$cookiePassword, $user->getPassword(), time() + (86400 * 30), "/");
+		setcookie($this->cookieName, $user->getUsername(), time() + (86400 * 30), "/");
+		setcookie($this->cookiePassword, $user->getHashedPassword(), time() + (86400 * 30), "/");
 	}
-	public function clearUserDataCookies () {
-			setcookie(self::$cookieName, '', time()-3600);
-			setcookie(self::$cookiePassword, '', time()-3600);
+	/**
+	 * Clears data in cookie and changes time to expired
+	 */
+	public function clearUserDataCookie () {
+			setcookie($this->cookieName, '', time()-3600);
+			setcookie($this->cookiePassword, '', time()-3600);
 	}
 }
