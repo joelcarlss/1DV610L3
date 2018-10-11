@@ -30,6 +30,8 @@ class CookieController {
             $this->loginByCookieData($user);
 
             $this->d->setMessage(\view\Messages::LOGIN_BY_COOKIE);
+        } catch (\model\ValidationException $e) {
+            $this->v->setMessage(\view\Messages::AUTH_ERROR_LOGIN);
         } catch (Exception $e) {
             $this->v->setMessage(\view\Messages::AUTH_ERROR_COOKIE);
             $this->v->clearCookieUserData();

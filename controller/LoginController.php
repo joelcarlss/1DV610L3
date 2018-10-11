@@ -1,10 +1,11 @@
 <?php
 
 namespace controller;
-use Exception;
 
 require_once('view/Messages.php');
 require_once('model/User.php');
+
+use Exception;
 class LoginController {
     
     private $v;
@@ -35,8 +36,10 @@ class LoginController {
             if ($this->v->getRequestStayLoggedIn()) {
                 $this->cc->createLoginCookie($user);
             }
-        } catch (Exception $e) {
+        } catch (\model\ValidationException $e) {
             $this->v->setMessage(\view\Messages::AUTH_ERROR_LOGIN);
+        } catch (Exception $e) {
+            $this->v->setMessage($e->getMessage());
         }
     }
     

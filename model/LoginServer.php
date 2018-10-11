@@ -1,7 +1,7 @@
 <?php
 
 namespace model;
-use customException;
+require_once('model/customExceptions.php');
 
 class LoginServer {
 
@@ -26,7 +26,7 @@ class LoginServer {
             $user->setId($result['id']);
             return true;
         } else {
-            throw new \Exception ('Validation Error');
+            throw new ValidationException ('Validation Error');
         }
     }
 

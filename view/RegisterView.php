@@ -101,7 +101,7 @@ class RegisterView {
 		$username = $_POST[$this->name];
 
         if (strlen($username) < $this->minimumNameLength) {
-			throw new Exception($this->usernameLengthMessage);
+			throw new Exception(\view\Messages::USERNAME_TO_SHORT);
 		} else {
 			return true;
 		}
