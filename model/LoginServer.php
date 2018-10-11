@@ -26,7 +26,7 @@ class LoginServer {
             $user->setId($result['id']);
             return true;
         } else {
-            throw new Exception ('Validation Error');
+            throw new \Exception ('Validation Error');
         }
     }
 

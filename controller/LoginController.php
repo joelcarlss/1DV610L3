@@ -32,7 +32,7 @@ class LoginController {
                 $this->cc->createLoginCookie($user);
             }
         } catch (Exception $e) {
-            $this->v->setMessage($e->getMessage());
+            $this->v->setMessage('Wrong name or password');
         }
     }
     

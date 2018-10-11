@@ -12,6 +12,7 @@ class LoginView {
 	private $keep = 'LoginView::KeepMeLoggedIn';
 	private $messageId = 'LoginView::Message';
 
+	private $welcomeMessage = 'Welcome';
 	private $missingUsernameMessage = 'Username is missing';
 	private $missingPasswordMessage = 'Password is missing';
 	private $authErrorMessage = 'Wrong name or password';
@@ -144,7 +145,7 @@ class LoginView {
 	/**
 	 * Clears data in cookie and changes time to expired
 	 */
-	public function clearUserDataCookie () : void {
+	public function clearCookieUserData () : void {
 			setcookie($this->cookieName, '', time()-3600);
 			setcookie($this->cookiePassword, '', time()-3600);
 	}

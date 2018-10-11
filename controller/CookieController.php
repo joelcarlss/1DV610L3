@@ -29,6 +29,7 @@ class CookieController {
             $this->loginByCookieData($user);
         } catch (Exception $e) {
             $this->v->setMessage('Wrong information in cookies');
+            $this->v->clearCookieUserData();
         }
     }
 
