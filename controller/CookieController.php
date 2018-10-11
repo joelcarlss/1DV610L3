@@ -24,8 +24,12 @@ class CookieController {
         $this->v->createCookieByUserData($postRequestUser);
     }
     public function handleCookieLogin () : void {
-        $user = $this->getNewUserInstanceFromCookieData();
-        $this->loginByCookieData($user);
+        try {
+            $user = $this->getNewUserInstanceFromCookieData();
+            $this->loginByCookieData($user);
+        } catch (Exception $e) {
+            $this->v->setMessage('Wrong information in cookies');
+        }
     }
 
     private function loginByCookieData($user) : void {

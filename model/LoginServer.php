@@ -1,7 +1,7 @@
 <?php
 
 namespace model;
-use Exception;
+use customException;
 
 class LoginServer {
 
@@ -25,11 +25,8 @@ class LoginServer {
         if ($result && password_verify($password, $result['password'])) {
             $user->setId($result['id']);
             return true;
-        } else if ($result && hash_equals($password, $result['password'])) {
-            $user->setId($result['id']);
-            return true;
         } else {
-            throw new LoginValidationError();
+            throw new Exception ('Validation Error');
         }
     }
 
