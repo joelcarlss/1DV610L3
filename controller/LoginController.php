@@ -3,6 +3,7 @@
 namespace controller;
 use Exception;
 
+require_once('view/Messages.php');
 require_once('model/User.php');
 class LoginController {
     
@@ -28,11 +29,12 @@ class LoginController {
         try {
             $user = $this->getNewUserInstanceFromLoginRequestData();
             $this->loginByPostRequest($user);
+
             if ($this->v->getRequestStayLoggedIn()) {
                 $this->cc->createLoginCookie($user);
             }
         } catch (Exception $e) {
-            $this->v->setMessage('Wrong name or password');
+            $this->v->setMessage(\view\Messages::LOGIN_AUTH_ERROR);
         }
     }
     
