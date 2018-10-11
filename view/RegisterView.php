@@ -132,9 +132,9 @@ class RegisterView {
 		$passwordConfirmation = $this->getRequestPasswordConfirmation();
 
         if (strlen($password) < $this->minimumPasswordLength) {
-			throw new Exception($this->passwordLengthMessage);
+			throw new Exception(\view\Messages::PASSWORD_TO_SHORT);
 		} else if ($passwordConfirmation != $password) {
-			throw new Exception($this->passwordMatchErrorMessage);
+			throw new Exception(\view\Messages::PASSWORD_MISMATCH);
 		}else {
 			return true;
 		}

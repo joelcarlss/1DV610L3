@@ -38,12 +38,11 @@ class RegisterServer {
         $statement = $connect->prepare($sql);
         $statement->bindParam(':username', $username);
         $statement->bindParam(':password', $password);
-        echo '2';
 
         if ($statement->execute()) {
-            die ('Success');
+            return true;
         } else {
-            die ('Fail');
+            throw new Exception ('Something went wrong');
         }
     }
 }
