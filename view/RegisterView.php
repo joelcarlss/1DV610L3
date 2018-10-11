@@ -2,6 +2,7 @@
 
 namespace view;
 use Exception;
+require_once('view/Messages.php');
 
 class RegisterView {
 	private $registerLink = 'register';
@@ -16,13 +17,6 @@ class RegisterView {
 	private $minimumNameLength = 3;
 	private $minimumPasswordLength = 6;
 	private $message = '';
-
-	private $usernameLengthMessage = 'Username has too few characters, at least 3 characters.';
-	private $passwordLengthMessage = 'Password has too few characters, at least 6 characters.';
-	private $passwordMatchErrorMessage = 'Passwords do not match.';
-	private $usernameNotAvailableMessage = 'Username not available.';
-
-
 
 	/**
 	 * Creates a HTTP-Response for register page.

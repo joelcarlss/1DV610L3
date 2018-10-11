@@ -2,6 +2,7 @@
 
 namespace view;
 use Exception;
+require_once('view/Messages.php');
 
 class LoginView {
 	private $login = 'LoginView::Login';
@@ -11,13 +12,6 @@ class LoginView {
 	private $cookiePassword = 'LoginView::CookiePassword';
 	private $keep = 'LoginView::KeepMeLoggedIn';
 	private $messageId = 'LoginView::Message';
-
-	private $welcomeMessage = 'Welcome';
-	private $missingUsernameMessage = 'Username is missing';
-	private $missingPasswordMessage = 'Password is missing';
-	private $authErrorMessage = 'Wrong name or password';
-	private $logoutMessage = 'Bye bye!';
-	private $authErrorCookieMessage = 'Wrong information in cookies';
 
 	private $message = '';
 	
@@ -108,7 +102,7 @@ class LoginView {
 		if ($this->stringNotEmpty($username)) {
 			return $username;
 		} else {
-			throw new Exception ($this->missingUsernameMessage);
+			throw new Exception (\view\Messages::USERNAME_MISSING);
 		}
 	}
 	private function getRequestUsername() : string {
@@ -120,7 +114,7 @@ class LoginView {
 		if ($this->stringNotEmpty($password)) {
 			return $password;
 		} else {
-			throw new Exception ($this->missingPasswordMessage);
+			throw new Exception (\view\Messages::PASSWORD_MISSING);
 		}
 	}
 	private function getRequestPassword() : string {

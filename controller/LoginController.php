@@ -30,11 +30,13 @@ class LoginController {
             $user = $this->getNewUserInstanceFromLoginRequestData();
             $this->loginByPostRequest($user);
 
+            $this->d->setMessage(\view\Messages::LOGIN_BY_POST);
+
             if ($this->v->getRequestStayLoggedIn()) {
                 $this->cc->createLoginCookie($user);
             }
         } catch (Exception $e) {
-            $this->v->setMessage(\view\Messages::LOGIN_AUTH_ERROR);
+            $this->v->setMessage(\view\Messages::AUTH_ERROR_LOGIN);
         }
     }
     

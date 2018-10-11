@@ -3,6 +3,7 @@
 namespace controller;
 use Exception;
 
+require_once('view/Messages.php');
 require_once('model/User.php');
 class CookieController {
     
@@ -27,8 +28,10 @@ class CookieController {
         try {
             $user = $this->getNewUserInstanceFromCookieData();
             $this->loginByCookieData($user);
+
+            $this->d->setMessage(\view\Messages::LOGIN_BY_COOKIE);
         } catch (Exception $e) {
-            $this->v->setMessage('Wrong information in cookies');
+            $this->v->setMessage(\view\Messages::AUTH_ERROR_COOKIE);
             $this->v->clearCookieUserData();
         }
     }

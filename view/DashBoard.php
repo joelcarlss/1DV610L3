@@ -1,16 +1,13 @@
 <?php
 
 namespace view;
+require_once('view/Messages.php');
 
 class DashBoard {
 
 
 	private $messageId = 'LoginView::Message';
 	private $logout = 'LoginView::Logout';
-
-	private $loginMessage = 'Welcome';
-	private $loginRememberMessage = 'Welcome and you will be remembered';
-	private $loginCookieMessage = 'Welcome back with cookie';
 
 	private $message = '';
 	/**
@@ -35,6 +32,10 @@ class DashBoard {
 				<input type="submit" name="' . $this->logout . '" value="logout"/>
 			</form>
 		';
+	}
+
+	public function setMessage ($message) {
+		$this->message = $message;
 	}
 
 	public function isLogOutAttempt() : bool {
