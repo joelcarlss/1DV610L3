@@ -73,7 +73,7 @@ class LoginView {
 
 
 	public function setMessage($message) : void {
-		$this->message .= $message;
+		$this->message = $message;
 	}
 	
 	// POST REQUEST FUNCTIONALITY

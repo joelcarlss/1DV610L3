@@ -19,9 +19,8 @@ class RegisterController {
         try {
             $user = $this->getNewUserWithRequestData();
             $this->registerNewUser($user);
-            //// DU ÄR HÄR. RENDER LOGINPAGE
-            // header("Location: /"); /* Redirect browser */
-            // exit();
+            
+            echo var_dump($_GET);
             
             
         } catch(Exception $e) {

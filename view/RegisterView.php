@@ -57,7 +57,7 @@ class RegisterView {
 	}
 	
 	public function setMessage($message) : void {
-		$this->message .= $message;
+		$this->message = $message;
 	}
 	public function isRegistering() : bool {
             if (!empty($_GET)) {
