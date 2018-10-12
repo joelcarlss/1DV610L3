@@ -20,8 +20,6 @@ class RegisterController {
             $user = $this->getNewUserWithRequestData();
             $this->registerNewUser($user);
             
-            echo var_dump($_GET);
-            
             
         } catch(Exception $e) {
             $this->rv->setMessage($e->getMessage());

@@ -2,6 +2,9 @@
 
 namespace controller;
 use Exception;
+
+require_once('view/Messages.php');
+
 class MainController {
     
     private $v;
@@ -56,6 +59,9 @@ class MainController {
         // TODO Remove dependency to DashBoard
          if ($this->d->isLogOutAttempt()) {
             $this->ss->logOut();
+            $this->v->setMessage(\view\Messages::LOGOUT_MESSAGE);
+            $this->v->clearCookieUserData();
+
         }
     }
     private function setTime() : void {

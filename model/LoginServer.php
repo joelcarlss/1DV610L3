@@ -22,7 +22,7 @@ class LoginServer {
         $result = $records->fetch(\PDO::FETCH_ASSOC);
 
         // TODO FIX PROBLEM WITH VALIDATION OF HASHED COOKIE STRING
-        if ($result && password_verify($password, $result['password'])) {
+        if ($result['username'] == $username && password_verify($password, $result['password'])) {
             $user->setId($result['id']);
             return true;
         } else {

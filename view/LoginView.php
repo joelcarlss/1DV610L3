@@ -57,7 +57,7 @@ class LoginView {
 					<p id="' . $this->messageId . '">' . $this->message . '</p>
 					
 					<label for="' . $this->name . '">Username :</label>
-					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="" />
+					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="' . $this->getRequestUsername() . '" />
 
 					<label for="' . $this->password . '">Password :</label>
 					<input type="password" id="' . $this->password . '" name="' . $this->password . '" />
@@ -106,7 +106,11 @@ class LoginView {
 		}
 	}
 	private function getRequestUsername() : string {
-		return $_POST[$this->name];
+		if (isset($_POST[$this->name])) {
+			return $_POST[$this->name];
+		} else {
+			return '';
+		}
 	}
 
 	public function getPassword() : string {
@@ -118,7 +122,11 @@ class LoginView {
 		}
 	}
 	private function getRequestPassword() : string {
-		return $_POST[$this->password];
+		if (isset($_POST[$this->password])) {
+			return $_POST[$this->password];
+		} else {
+			return '';
+		}
 	}
 	
 
@@ -134,7 +142,7 @@ class LoginView {
 	 */
 	public function createCookieByUserData ($user) : void {
 		setcookie($this->cookieName, $user->getUsername(), time() + (86400 * 30), "/");
-		setcookie($this->cookiePassword, $user->getHashedPassword(), time() + (86400 * 30), "/");
+		setcookie($this->cookiePassword, $user->getPassword(), time() + (86400 * 30), "/");
 	}
 	/**
 	 * Clears data in cookie and changes time to expired
