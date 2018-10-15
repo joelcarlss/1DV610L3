@@ -5,6 +5,10 @@ namespace controller;
 require_once('view/Messages.php');
 require_once('model/User.php');
 
+/**
+ * Class holding functionality related to login by post
+ */
+
 use Exception;
 class LoginController {
     
@@ -22,10 +26,16 @@ class LoginController {
         $this->cc = $cc;
     }
     
+    /**
+     * @return bool
+     */
     public function isLoginAttempt () : bool {
         return $this->v->postIsLogin();
     }
     
+    /**
+     * Handles a log in attempt by calling methods for geting post data and sending it to server.
+     */
     public function handleLogin () : void {
         try {
             $user = $this->getNewUserInstanceFromLoginRequestData();
@@ -43,8 +53,11 @@ class LoginController {
         }
     }
     
+    /**
+     * Creates session if user credentials is correct
+     */
     private function loginByPostRequest($user) : void {
-        if ($this->ls->loginByUserCredentials($user)) {
+        if ($this->ls->userCredentialsMatch($user)) {
             $this->ss->createSessionByUserData($user);
         }
     }

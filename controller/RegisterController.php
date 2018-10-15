@@ -3,6 +3,10 @@
 namespace controller;
 require_once('model/User.php');
 use Exception;
+
+/**
+ * Holding server functionality for registering by post request
+ */
 class RegisterController {
     
     private $rv;

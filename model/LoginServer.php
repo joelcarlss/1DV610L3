@@ -3,6 +3,9 @@
 namespace model;
 require_once('model/customExceptions.php');
 
+/**
+ * Holding server functionality for login by post request
+ */
 class LoginServer {
 
 
@@ -11,7 +14,11 @@ class LoginServer {
         $this->dc = $dc; 
     }
     
-    public function loginByUserCredentials ($user) : bool {
+    /**
+     * Checks if user credentials match by making a search to database.
+     * If username exsists and password matches bool true is returned
+     */
+    public function userCredentialsMatch ($user) : bool {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
         $password = $user->getPassword();

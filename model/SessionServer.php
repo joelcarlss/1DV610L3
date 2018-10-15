@@ -2,29 +2,23 @@
 
 namespace model;
 use Exception;
-
+/**
+ * Class holding functionality for everything related to Session.
+ */
 class SessionServer {
 
-    
-    public function loginBySessionData ($user) {
-    }
-
+    /**
+     * @return bool depending on if session is set or not
+     */
     public function isLoggedIn () : bool {
         return $this->isSession();
     }
     
+    /**
+     * Logs out user by destroying the session
+     */
     public function logOut () : void {
             $this->destroySession();
-    }
-    
-    /**
-     * If Session exists it will be returned
-     * @return Array
-     */
-    private function getSessionData() {
-        if (!empty($_SESSION)) {
-			return $_SESSION;
-        }
     }
 
     /**

@@ -21,7 +21,6 @@ use PDO;
 
       try {
         return $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
-			//  return new PDO("mysql:host=" . $this->server . ";dbname=" . $this->database . ";", $this->username, $this->password);
 		  }
 		  catch(PDOException $e) {
 			  die ("Connection Failed: " . $e->getMessage());
