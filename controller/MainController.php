@@ -42,11 +42,14 @@ class MainController {
         $this->lc = $lc;
         $this->cc = $cc;
         $this->rc = $rc;
-        $this->start();
+        
     }
 
+    /**
+     * Sets server time then checks if any user input or cookies needs to be handled
+     */
     private function start () : void {
-        $this->setTime();
+        $this->sendTimeToView();
         if ($this->ss->isLoggedIn()) {
             // TODO Remove dependency to DashBoard
              if ($this->d->isLogOutAttempt()) {
@@ -56,18 +59,19 @@ class MainController {
             }
             //Session
         } else if ($this->lc->isLoginAttempt()) {
-            $this->handleLogin();
+            $this->lc->handleLogin();
         } else if ($this->rc->isRegisterAttempt()) {
             $this->rc->handleRegister();
         } else if ($this->cc->isCookieData()) {
             $this->cc->handleCookieLogin();
         }
     }
-    private function setTime() : void {
+
+    /**
+     * Gets time from ServerTime and sends it to DateTimeView
+     */
+    private function sendTimeToView() : void {
         $time = $this->st->getCurrentServerTime();
         $this->dtv->setTime($time);
-    }
-    private function handleLogin () : void {
-        $this->lc->handleLogin();
     }
 }

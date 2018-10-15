@@ -12,6 +12,10 @@ class RegisterServer {
         $this->conn = $dc->connect();
     }
 
+    /**
+     * Registers new user by user credentials if username is available.
+     * @throws Exception if username isUsernameAvailable returns false
+     */
     public function registerNewUser($user) {
         if ($this->isUsernameAvailable($user)) {
             $this->addNewUserToDatabase($user);
@@ -19,6 +23,11 @@ class RegisterServer {
             throw new Exception('User exists, pick another username.');
         }
     }
+
+    /**
+     * Checks username availability by searching database by username.
+     * @return true if search turns up blank and false if something matches
+     */
     private function isUsernameAvailable($user) {
         $connect = $this->dc->connect();
         $username = $user->getUsername();
@@ -30,6 +39,12 @@ class RegisterServer {
 
         return !$results;
     }
+
+    /**
+     * Adds new user to database
+     * @return true if executuion is ok
+     * @throws Exception if something goes wrong
+     */
     private function addNewUserToDatabase($user) {
         $connect = $this->dc->connect();
         $username = $user->getUsername();

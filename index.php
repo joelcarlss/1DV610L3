@@ -43,6 +43,7 @@ $lc = new \controller\LoginController($v, $d, $ls, $ss, $cc);
 $rc = new \controller\RegisterController($rv, $rs);
 $mc = new \controller\MainController($v, $dtv, $d, $rv, $st, $ls, $ss, $lc, $cc, $rc);
 
+$mc->start();
 $isRegistering = $rv->isRegistering();
 $isLoggedin = $ss->isLoggedIn();
 

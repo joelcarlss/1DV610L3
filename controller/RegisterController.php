@@ -16,13 +16,23 @@ class RegisterController {
         $this->rv = $rv;
         $this->rs = $rs;
     }
+
+    /**
+     * @return bool
+     */
     public function isRegisterAttempt () : bool {
         return $this->rv->isRegisterPost();
     }
+
+    /**
+     * Handles register by post request.
+     * Gets user and sends it to registry
+     * Sends message to view if error occurs
+     */
     public function handleRegister() : void {
         try {
             $user = $this->getNewUserWithRequestData();
-            $this->registerNewUser($user);
+            $this->rs->registerNewUser($user);
             
             
         } catch(Exception $e) {
@@ -30,15 +40,14 @@ class RegisterController {
         }
     }
 
+    /**
+     * @return new User instance if username and password from post exists.
+     */
     private function getNewUserWithRequestData() : \model\User {
-            $username = $this->rv->getUserName();
-            $password = $this->rv->getPassword();
-            if ($password && $username) {
-                return new \model\User($username, $password);
-            }
-    }
-
-    public function registerNewUser($user) : void {
-        $this->rs->registerNewUser($user); // needs to be instance of user
+        $username = $this->rv->getUserName();
+        $password = $this->rv->getPassword();
+        if ($password && $username) {
+            return new \model\User($username, $password);
+        }
     }
 }
