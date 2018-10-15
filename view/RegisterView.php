@@ -42,7 +42,7 @@ class RegisterView {
 					<p id="' . $this->messageId . '">' . $message . '</p>
 					
 					<label for="' . $this->name . '">Username :</label>
-					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="" />
+					<input type="text" id="' . $this->name . '" name="' . $this->name . '" value="' . $this->getRequestUserName() . '" />
 
 					<label for="' . $this->password . '">Password :</label>
 					<input type="password" id="' . $this->password . '" name="' . $this->password . '" />
@@ -111,7 +111,11 @@ class RegisterView {
 	 * @return string
 	 */
 	private function getRequestUserName() : string {
-		return $_POST[$this->name];
+		if (isset($_POST[$this->name])) {
+			return $_POST[$this->name];
+		} else {
+			return '';
+		}
 	}
 
 	// GET PASSWORD FUNCTIONALITY
@@ -145,7 +149,11 @@ class RegisterView {
 	 * @return string
 	 */
 	public function getRequestPassword() : string {
-		return $_POST[$this->password];
+		if (isset($_POST[$this->password])) {
+			return $_POST[$this->password];
+		} else {
+			return '';
+		}
 	}
     /**
 	 * Gets password confirmation value

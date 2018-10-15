@@ -48,6 +48,12 @@ class MainController {
     private function start () : void {
         $this->setTime();
         if ($this->ss->isLoggedIn()) {
+            // TODO Remove dependency to DashBoard
+             if ($this->d->isLogOutAttempt()) {
+                $this->ss->logOut();
+                $this->v->setMessage(\view\Messages::LOGOUT_MESSAGE);
+                $this->v->clearCookieUserData();
+            }
             //Session
         } else if ($this->lc->isLoginAttempt()) {
             $this->handleLogin();
@@ -55,13 +61,6 @@ class MainController {
             $this->rc->handleRegister();
         } else if ($this->cc->isCookieData()) {
             $this->cc->handleCookieLogin();
-        }
-        // TODO Remove dependency to DashBoard
-         if ($this->d->isLogOutAttempt()) {
-            $this->ss->logOut();
-            $this->v->setMessage(\view\Messages::LOGOUT_MESSAGE);
-            $this->v->clearCookieUserData();
-
         }
     }
     private function setTime() : void {

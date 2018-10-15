@@ -29,7 +29,7 @@ class RegisterController {
     private function getNewUserWithRequestData() : \model\User {
             $username = $this->rv->getUserName();
             $password = $this->rv->getPassword();
-            if ($username && $password) {
+            if ($password && $username) {
                 return new \model\User($username, $password);
             }
     }

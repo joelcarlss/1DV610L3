@@ -31,10 +31,10 @@ class CookieController {
 
             $this->d->setMessage(\view\Messages::LOGIN_BY_COOKIE);
         } catch (\model\ValidationException $e) {
-            $this->v->setMessage(\view\Messages::AUTH_ERROR_LOGIN);
-        } catch (Exception $e) {
             $this->v->setMessage(\view\Messages::AUTH_ERROR_COOKIE);
             $this->v->clearCookieUserData();
+        } catch (Exception $e) {
+            $this->v->setMessage($e->getMessage());
         }
     }
 
@@ -47,9 +47,9 @@ class CookieController {
     private function getNewUserInstanceFromCookieData() : \model\User {
         $username = $this->v->getCookieUsername();
         $password = $this->v->getCookiePassword();
-        return $this->getNewUserInstance($username, $password);
+        return $this->getNewUserInstance($password, $username);
     }
-    private function getNewUserInstance($username, $password) : \model\User {
+    private function getNewUserInstance($password, $username) : \model\User {
         return new \model\User($username, $password);
     }
 }
