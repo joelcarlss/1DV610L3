@@ -17,6 +17,7 @@ require_once('model/DatabaseConnection.php');
 require_once('controller/MainController.php');
 require_once('controller/CookieController.php');
 require_once('controller/LoginController.php');
+require_once('controller/LogOutController.php');
 require_once('controller/RegisterController.php');
 
 // OPTIONS FOR SHOWING ERRORS
@@ -40,8 +41,9 @@ $rs = new \model\RegisterServer($dc);
 
 $cc = new \controller\CookieController($v, $d, $ls, $ss);
 $lc = new \controller\LoginController($v, $d, $ls, $ss, $cc);
+$loc = new \controller\LogOutController($v, $d, $ss);
 $rc = new \controller\RegisterController($rv, $rs);
-$mc = new \controller\MainController($v, $dtv, $d, $rv, $st, $ls, $ss, $lc, $cc, $rc);
+$mc = new \controller\MainController($v, $dtv, $st, $lc, $loc, $cc, $rc);
 
 $mc->start();
 $isRegistering = $rv->isRegistering();
