@@ -1,7 +1,7 @@
 <?php
-namespace Encrypt\view;
+namespace Encrypt;
 
-class CaesarCipher {
+class StartingPoint {
 
   public function __construct () {
 }
@@ -15,7 +15,7 @@ class CaesarCipher {
         </head>
         <body>
           <h2>Encryption</h2>
-          
+
           </div>
          </body>
       </html>
