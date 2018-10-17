@@ -1,2 +1,2 @@
 <?php
-namespace Encrypt\controller;
+namespace encrypt\controller;

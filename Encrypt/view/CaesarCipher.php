@@ -1,5 +1,5 @@
 <?php
-namespace Encrypt\view;
+namespace ncrypt\view;
 
 class CaesarCipher {
 

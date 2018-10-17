@@ -20,6 +20,8 @@ require_once('controller/LoginController.php');
 require_once('controller/LogOutController.php');
 require_once('controller/RegisterController.php');
 
+require_once('encrypt/Start.php');
+
 // OPTIONS FOR SHOWING ERRORS
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
@@ -28,10 +30,12 @@ ini_set('display_errors', 'On');
 session_start();
 
 //INSTANCES
+$enc = new \encrypt\Start();
+
 $v = new \view\LoginView();
 $rv = new \view\RegisterView();
 $dtv = new \view\DateTimeView();
-$d = new \view\DashBoard();
+$d = new \view\DashBoard($enc);
 
 $st = new \model\ServerTime();
 $ss = new \model\SessionServer();

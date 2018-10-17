@@ -1,24 +1,23 @@
 <?php
-namespace Encrypt\view;
+namespace encrypt\view;
 
 class LayoutView {
 
+  private $title = 'Encryption';
+  
   public function __construct () {
 }
   
   public function render() {
-    echo '<!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <title>Login Example</title>
-        </head>
-        <body>
-          <h2>Encryption</h2>
-
-          </div>
-         </body>
-      </html>
+    return '
+          <h2> ' . $this->title .' </h2>
+            <div>
+              ' . $this->getPageToRender() . ' 
+            </div>
     ';
+  }
+
+  private function getPageToRender() {
+    
   }
 }

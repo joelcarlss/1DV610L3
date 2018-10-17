@@ -6,8 +6,13 @@ require_once('view/Messages.php');
 class DashBoard {
 
 
+	private $encrypt;
 	private $messageId = 'LoginView::Message';
 	private $logout = 'LoginView::Logout';
+
+	public function __construct (\encrypt\Start $encrypt) {
+		$this->encrypt = $encrypt;
+	}
 
 	private $message = '';
 	/**
@@ -16,7 +21,9 @@ class DashBoard {
 	 */
 	public function response() : string {
 		
-		$response = $this->generateLogoutButtonHTML();
+		$response .= $this->encrypt->render();
+		$response .= '\n';
+		$response .= $this->generateLogoutButtonHTML();
 		return $response;
 	}
 

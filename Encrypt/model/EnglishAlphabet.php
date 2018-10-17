@@ -1,2 +1,2 @@
 <?php
-namespace Encrypt\model;
+namespace encrypt\model;
