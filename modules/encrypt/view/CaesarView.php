@@ -8,12 +8,18 @@ class CaesarView {
     private $encrypt = 'EncryptionView::Encrypt';
 
     private $title = 'Encryption';
+    private $encryptedMessage = '';
+
+
     private $caesarView;
   
     public function render() {
         return '
                 <div>
-                
+                ' . $this->generateInputForm() . '
+                </div>
+                <div>
+                ' . $this->generateOutputField() . '
                 </div>
         ';
     }
@@ -22,18 +28,38 @@ class CaesarView {
         <form method="post" > 
             <fieldset>
                 
-                <label for="' . $this->textInput . '">Username :</label>
+                <label for="' . $this->textInput . '">Enter your text here: :</label>
                 <input type="text" id="' . $this->textInput . '" name="' . $this->textInput . '" value="' . $this->getRequestTextInput() . '" />
 
+                <label for="' . $this->alphabet . '">Choose alphabet: </label>
                 <select name="' . $this->alphabet . '">
                     <option value="english">English</option>
                     <option value="swedish">Swedish</option>
                 </select>
                 
-                <input type="submit" name="' . $this->encrypt . '" value="login" />
+                <input type="submit" name="' . $this->encrypt . '" value="Generate encrypted message" />
             </fieldset>
         </form>
     ';
+    }
+
+    private function generateOutputField () : string {
+        if ($this->stringNotEmpty($this->encryptedMessage)) {
+            return '
+                <h3>Encrypted Message:</h3>
+                <p>' . $this->encryptedMessage . '</p>
+            ';
+        } else {
+            return '';
+        }
+    }
+
+    public function setEncryptedMessage ($encryptedMessage) : void {
+        $this->encryptedMessage = $encryptedMessage;
+    }
+
+    public function isEncryptionPost () {
+        return isset($_POST[$this->encrypt]);
     }
 
     public function getTextInput () {

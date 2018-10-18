@@ -12,8 +12,6 @@ class Start {
   private $mainController;
   private $caesarView;
 
-
-
   public function __construct () {
     $this->caesarView = new \encrypt\view\CaesarView();
     $this->layoutView = new \encrypt\view\LayoutView($this->caesarView);

@@ -7,12 +7,14 @@ class MainController {
     private $caesarView;
 
 
-    public function __construct (MainController $mc, CaesarView $cv) {
-        $this->mainController = $mc;
+    public function __construct (\encrypt\view\LayoutView $lv, \encrypt\view\CaesarView $cv) {
+        $this->layoutView = $lv;
         $this->caesarView = $cv;
     }
     
     public function run() {
-      return 'Hello Wold';
+        if ($this->caesarView->isEncryptionPost()) {
+            echo 'Hello Wold';
+        }
     }
   }
