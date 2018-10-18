@@ -10,14 +10,14 @@ class LayoutView {
   
   public function render() {
     return '
-          <h2> ' . $this->title .' </h2>
+          <h3> ' . $this->title .' </h3>
             <div>
-              ' . $this->getPageToRender() . ' 
+            ' . $this->getPageToRender() . '
             </div>
     ';
   }
 
   private function getPageToRender() {
-    
+    return 
   }
 }
