@@ -3,8 +3,8 @@
 namespace controller;
 use Exception;
 
-require_once('view/Messages.php');
-require_once('model/User.php');
+require_once('app/view/Messages.php');
+require_once('app/model/User.php');
 class CookieController {
     
     private $v;

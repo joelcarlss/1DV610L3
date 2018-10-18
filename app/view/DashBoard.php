@@ -1,7 +1,7 @@
 <?php
 
 namespace view;
-require_once('view/Messages.php');
+require_once('app/view/Messages.php');
 
 class DashBoard {
 

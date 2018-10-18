@@ -2,7 +2,7 @@
 
 namespace controller;
 
-require_once('view/Messages.php');
+require_once('app/view/Messages.php');
 
 /**
  * Class holding functionality related to log out by post

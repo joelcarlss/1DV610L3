@@ -1,7 +1,7 @@
 <?php
 
 namespace controller;
-require_once('model/User.php');
+require_once('app/model/User.php');
 use Exception;
 
 /**

@@ -20,7 +20,7 @@ require_once('app/controller/LoginController.php');
 require_once('app/controller/LogOutController.php');
 require_once('app/controller/RegisterController.php');
 
-require_once('module/encrypt/Start.php');
+require_once('modules/encrypt/Start.php');
 
 // OPTIONS FOR SHOWING ERRORS
 error_reporting(E_ALL);

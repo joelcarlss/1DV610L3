@@ -1,7 +1,7 @@
 <?php
 
 namespace model;
-require_once('model/customExceptions.php');
+require_once('app/model/customExceptions.php');
 
 /**
  * Holding server functionality for login by post request

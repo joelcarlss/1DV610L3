@@ -2,7 +2,7 @@
 
 namespace view;
 use Exception;
-require_once('view/Messages.php');
+require_once('app/view/Messages.php');
 
 class RegisterView {
 	private $registerLink = 'register';

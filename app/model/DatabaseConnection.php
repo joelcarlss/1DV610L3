@@ -3,7 +3,7 @@ namespace model;
 use Exception;
 use PDO;
 
-  require_once('model/databaseValues.php');
+  require_once('app/model/databaseValues.php');
   /**
    * Class holds database connection
    * Source of code: https://www.youtube.com/watch?v=bjT5PJn0Mu8
