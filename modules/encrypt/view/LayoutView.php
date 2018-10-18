@@ -5,7 +5,8 @@ class LayoutView {
 
   private $title = 'Encryption';
   
-  public function __construct () {
+  public function __construct (CaesarView $cv) {
+    $this->caesarView = $cv;
 }
   
   public function render() {
@@ -18,6 +19,6 @@ class LayoutView {
   }
 
   private function getPageToRender() {
-    return 
+    return $this->caesarView->render();
   }
 }

@@ -3,10 +3,16 @@ namespace encrypt\controller;
 
 class MainController {
 
-    public function __construct () {
+    private $mainController;
+    private $caesarView;
+
+
+    public function __construct (MainController $mc, CaesarView $cv) {
+        $this->mainController = $mc;
+        $this->caesarView = $cv;
     }
     
-    public function render() {
+    public function run() {
       return 'Hello Wold';
     }
   }
