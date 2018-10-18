@@ -39,7 +39,7 @@ class CookieController {
     }
 
     private function loginByCookieData($user) : void {
-        if ($this->ls->loginByUserCredentials($user)) {
+        if ($this->ls->userCredentialsMatch($user)) {
             $this->ss->createSessionByUserData($user);
         }
     }

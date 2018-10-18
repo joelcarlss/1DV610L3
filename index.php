@@ -2,25 +2,25 @@
 
 //THE FILES NEEDED
 // VIEW
-require_once('view/RegisterView.php');
-require_once('view/LoginView.php');
-require_once('view/DateTimeView.php');
-require_once('view/LayoutView.php');
-require_once('view/DashBoard.php');
+require_once('app/view/RegisterView.php');
+require_once('app/view/LoginView.php');
+require_once('app/view/DateTimeView.php');
+require_once('app/view/LayoutView.php');
+require_once('app/view/DashBoard.php');
 // MODEL
-require_once('model/ServerTime.php');
-require_once('model/LoginServer.php');
-require_once('model/SessionServer.php');
-require_once('model/RegisterServer.php');
-require_once('model/DatabaseConnection.php');
+require_once('app/model/ServerTime.php');
+require_once('app/model/LoginServer.php');
+require_once('app/model/SessionServer.php');
+require_once('app/model/RegisterServer.php');
+require_once('app/model/DatabaseConnection.php');
 // CONTROLLER
-require_once('controller/MainController.php');
-require_once('controller/CookieController.php');
-require_once('controller/LoginController.php');
-require_once('controller/LogOutController.php');
-require_once('controller/RegisterController.php');
+require_once('app/controller/MainController.php');
+require_once('app/controller/CookieController.php');
+require_once('app/controller/LoginController.php');
+require_once('app/controller/LogOutController.php');
+require_once('app/controller/RegisterController.php');
 
-require_once('encrypt/Start.php');
+require_once('module/encrypt/Start.php');
 
 // OPTIONS FOR SHOWING ERRORS
 error_reporting(E_ALL);

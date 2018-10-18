@@ -21,8 +21,9 @@ class DashBoard {
 	 */
 	public function response() : string {
 		
+		$response ='';
+
 		$response .= $this->encrypt->render();
-		$response .= '\n';
 		$response .= $this->generateLogoutButtonHTML();
 		return $response;
 	}
