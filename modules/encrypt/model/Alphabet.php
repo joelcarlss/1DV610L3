@@ -1,5 +1,6 @@
 <?php
 namespace encrypt\model;
+use Exception;
 
 class Alphabet {
 

@@ -4,14 +4,17 @@ namespace encrypt\view;
 class CaesarView {
 
     private $textInput = 'EncryptionView::TextInput';
-    private $alphabet = 'EncryptionView::Alphabet';
+    private $key = 'EncryptionView::Key';
     private $encrypt = 'EncryptionView::Encrypt';
 
     private $title = 'Encryption';
     private $encryptedMessage = '';
 
+    private $englishAlphabet;
 
-    private $caesarView;
+    public function __construct (\encrypt\model\EnglishAlphabet $englishAlphabet) {
+        $this->englishAlphabet = $englishAlphabet;
+    }
   
     public function render() {
         return '
@@ -31,10 +34,9 @@ class CaesarView {
                 <label for="' . $this->textInput . '">Enter your text here: :</label>
                 <input type="text" id="' . $this->textInput . '" name="' . $this->textInput . '" value="' . $this->getRequestTextInput() . '" />
 
-                <label for="' . $this->alphabet . '">Choose alphabet: </label>
-                <select name="' . $this->alphabet . '">
-                    <option value="english">English</option>
-                    <option value="swedish">Swedish</option>
+                <label for="' . $this->key . '">Choose key: </label>
+                <select name="' . $this->key . '">
+                ' . $this->generateDropDownValues() . '
                 </select>
                 
                 <input type="submit" name="' . $this->encrypt . '" value="Generate encrypted message" />
@@ -53,6 +55,14 @@ class CaesarView {
             return '';
         }
     }
+    private function generateDropDownValues() {
+        $alphabetLength = $this->englishAlphabet->getLength();
+        $response = '';
+        for ($i = 0; $i < $alphabetLength; $i++) {
+            $response .= '<option value="' . $i . '">' . $i . '</option>';
+        }
+        return $response;
+    }
 
     public function setEncryptedMessage ($encryptedMessage) : void {
         $this->encryptedMessage = $encryptedMessage;
@@ -63,7 +73,7 @@ class CaesarView {
     }
 
     public function getTextInput () {
-        $text = getRequestTextInput();
+        $text = $this->getRequestTextInput();
         if ($this->stringNotEmpty($text)) {
             return $text;
         } else {
