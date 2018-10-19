@@ -10,12 +10,17 @@ class EnglishAlphabet {
          $this->alphabet = range('a', 'z');
     }
 
-    public function getLetterByIndex($i) : string {
+    public function getCharacterByIndex($i) : string {
         if ($i < $this->alphabet) {
             return $this->alphabet[$i];
         } else {
             throw new Exception('Index value is larger than alphabets length');
         }
+    }
+
+    public function getIndexByCharacter ($character) {
+        $index = array_search($character, $this->alphabet);
+        return $index;
     }
 
     public function getLength () : int {

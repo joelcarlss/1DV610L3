@@ -13,5 +13,4 @@ class Alphabet {
             throw new Exception('This should be impossible');
         }
     }
-
 }

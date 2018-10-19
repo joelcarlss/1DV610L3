@@ -55,11 +55,20 @@ class CaesarView {
             return '';
         }
     }
-    private function generateDropDownValues() {
+
+    private function generateDropDownValues() : string {
         $alphabetLength = $this->englishAlphabet->getLength();
         $response = '';
         for ($i = 0; $i < $alphabetLength; $i++) {
-            $response .= '<option value="' . $i . '">' . $i . '</option>';
+            $response .= '<option ' . $this->generateOptionAttributes($i) . ' value="' . $i . '">' . $i . '</option>';
+        }
+        return $response;
+    }
+
+    private function generateOptionAttributes($i) : string {
+        $response = '';
+        if ($i == $this->getRequestEncryptionKey()) {
+            $response .= 'selected="selected"';
         }
         return $response;
     }
@@ -68,8 +77,16 @@ class CaesarView {
         $this->encryptedMessage = $encryptedMessage;
     }
 
-    public function isEncryptionPost () {
+    public function isEncryptionPost () : bool {
         return isset($_POST[$this->encrypt]);
+    }
+
+    // TODO set type : int? : string?
+    public function getRequestEncryptionKey() {
+            return $this->stringToInt($_POST[$this->key]);
+    }
+    private function stringToInt($string) {
+        return (int)$string;
     }
 
     public function getTextInput () {
