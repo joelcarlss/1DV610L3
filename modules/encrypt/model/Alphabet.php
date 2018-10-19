@@ -3,7 +3,7 @@ namespace encrypt\model;
 
 class Alphabet {
 
-    private $alphabet = [];
+    private $alphabet;
 
     public function getLetterByIndex($i) : string {
         if ($i < $this->alphabet) {
@@ -12,4 +12,5 @@ class Alphabet {
             throw new Exception('This should be impossible');
         }
     }
+
 }

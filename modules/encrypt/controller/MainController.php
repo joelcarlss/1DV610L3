@@ -12,9 +12,13 @@ class MainController {
         $this->caesarView = $cv;
     }
     
-    public function run() {
+    public function handleRequest() {
         if ($this->caesarView->isEncryptionPost()) {
-            echo 'Hello Wold';
+            
         }
+    }
+    private function encryptPost () {
+        $textInput = $this->caesarView->getRequestTextInput();
+        
     }
   }

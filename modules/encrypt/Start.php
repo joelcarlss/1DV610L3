@@ -16,7 +16,7 @@ class Start {
     $this->caesarView = new \encrypt\view\CaesarView();
     $this->layoutView = new \encrypt\view\LayoutView($this->caesarView);
     $this->mainController = new \encrypt\controller\MainController($this->layoutView, $this->caesarView);
-    $this->mainController->run();
+    $this->mainController->handleRequest();
 }
   
   public function render() {
