@@ -21,6 +21,9 @@ class EnglishAlphabet {
 
     public function getIndexByCharacter ($character) {
         $index = array_search($character, $this->alphabet);
+        if (gettype($index) != 'integer') {
+            throw new IllegalCharacterException('Letter not included in alphabet');
+        }
         return $index;
     }
 

@@ -8,8 +8,9 @@ class CaesarView {
     private $encrypt = 'EncryptionView::Encrypt';
 
     private $title = 'Encryption';
-    private $encryptedMessage = '';
     private $keyDefaultValue = 1;
+    private $encryptedMessage = '';
+    private $message = '';
 
     private $englishAlphabet;
 
@@ -31,7 +32,7 @@ class CaesarView {
         return '
         <form method="post" > 
             <fieldset>
-                
+                <p>' . $this->message . '</p>
                 <label for="' . $this->textInput . '">Enter your text here: :</label>
                 <input type="text" id="' . $this->textInput . '" name="' . $this->textInput . '" value="' . $this->getRequestTextInput() . '" />
 
@@ -74,6 +75,9 @@ class CaesarView {
         return $response;
     }
 
+    public function setMessage($message) {
+        $this->message = $message;
+    }
     public function setEncryptedMessage ($encryptedMessage) : void {
         $this->encryptedMessage = $encryptedMessage;
     }

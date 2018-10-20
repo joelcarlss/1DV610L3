@@ -3,4 +3,4 @@
 namespace encrypt\model;
 use Exception;
 
-class IndexHigherThanLengthException extends Exception {}
+class IllegalCharacterException extends Exception {}

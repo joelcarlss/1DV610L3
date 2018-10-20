@@ -7,6 +7,8 @@ class EncryptionModel {
 
     private $englishAlphabet;
 
+    private $spaceCharacter = ' ';
+
     public function __construct (\encrypt\model\EnglishAlphabet $ea) {
         $this->englishAlphabet = $ea;
     }
@@ -14,18 +16,34 @@ class EncryptionModel {
     public function setKey(int $key) {
         $this->key = $key;
     }
+
     public function encryptStringWithKey(string $string) : string {
         $stringAsArray = str_split($string);
         $encryptedMessage = '';
         if (isset($this->key)) {
             foreach ($stringAsArray as $key => $value) {
-                $characterIndex = $this->englishAlphabet->getIndexByCharacter($value);
-                $newCalculatedIndex = $this->getCalculatedIndexByKeyAndIndex($characterIndex);
-                $encryptedLetter = $this->getCharacterByIndex($newCalculatedIndex);
+                $encryptedLetter = '';
+                if ($this->characterIsSpace($value)) {
+                    $encryptedLetter .= $this->spaceCharacter;
+                } else {
+                    $encryptedLetter .= $this->encryptCharacterWithKey($value);
+                    echo $encryptedLetter;
+                    
+                }
                 $encryptedMessage .= $encryptedLetter;
             }
         }
         return $encryptedMessage;
+    }
+    private function encryptCharacterWithKey(string $character) : string {
+        $characterIndex = $this->englishAlphabet->getIndexByCharacter($character);
+        $newCalculatedIndex = $this->getCalculatedIndexByKeyAndIndex($characterIndex);
+        $encryptedLetter = $this->getCharacterByIndex($newCalculatedIndex);
+        return $encryptedLetter;
+    }
+
+    private function characterIsSpace(string $character) {
+        return ($character == ' ');
     }
     private function getCharacterByIndex($index) {
         return $this->englishAlphabet->getCharacterByIndex($index);
