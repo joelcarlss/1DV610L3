@@ -6,6 +6,7 @@ class CaesarView {
     private $textInput = 'EncryptionView::TextInput';
     private $key = 'EncryptionView::Key';
     private $encrypt = 'EncryptionView::Encrypt';
+    private $caesarInformation = 'EncryptionView::CaesarInformation';
 
     private $title = 'Encryption';
     private $keyDefaultValue = 1;
@@ -20,13 +21,24 @@ class CaesarView {
   
     public function render() {
         return '
+            <h1>Ceasar Encryption</h1>
                 <div>
-                ' . $this->generateInputForm() . '
+                    ' . $this->generateInfoLink() . '
                 </div>
                 <div>
-                ' . $this->generateOutputField() . '
+                    ' . $this->generateInputForm() . '
+                </div>
+                <div>
+                    ' . $this->generateOutputField() . '
                 </div>
         ';
+    }
+    private function generateInfoLink() {
+        if ($this->isGetInformationPageRequest()) {
+            return '<a href="?">Back to encryption</a>';
+        } else {
+            return '<a href="?' . $this->caesarInformation . '">Info about Caesar Cipher</a>';
+        }
     }
     private function generateInputForm () {
         return '
@@ -75,6 +87,7 @@ class CaesarView {
         return $response;
     }
 
+    // SETS
     public function setMessage($message) {
         $this->message = $message;
     }
@@ -82,6 +95,17 @@ class CaesarView {
         $this->encryptedMessage = $encryptedMessage;
     }
 
+    // GET REQUEST HANDLING
+    public function isGetInformationPageRequest () {
+        if (!empty($_GET)) {
+            if(isset($_GET[$this->caesarInformation])) {
+            return true;
+        }
+    }
+    return false;
+    }
+
+    // POST REQUEST HANDLING
     public function isEncryptionPost () : bool {
         return isset($_POST[$this->encrypt]);
     }
@@ -92,9 +116,6 @@ class CaesarView {
         } else {
             return $this->keyDefaultValue;
         }
-    }
-    private function stringToInt($string) {
-        return (int)$string;
     }
 
     public function getTextInput () {
@@ -112,6 +133,12 @@ class CaesarView {
             return '';
         }
     }
+
+    // Other Low level functions
+    private function stringToInt($string) {
+        return (int)$string;
+    }
+
     private function stringNotEmpty ($string) : bool {
         return (strlen($string) > 0);
     }

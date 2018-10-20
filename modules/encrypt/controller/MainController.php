@@ -20,6 +20,7 @@ class MainController {
     public function handleRequest() {
         if ($this->caesarView->isEncryptionPost()) {
             try {
+                // TODO Set language
                 $this->encryptPost();
             } catch (\encrypt\model\IllegalCharacterException $e) {
                 $this->caesarView->setMessage(\encrypt\view\Messages::INVALID_CHARACTER);
