@@ -14,9 +14,12 @@ class CaesarView {
     private $message = '';
 
     private $englishAlphabet;
+    private $informationView;
 
-    public function __construct (\encrypt\model\EnglishAlphabet $englishAlphabet) {
+    public function __construct (\encrypt\model\EnglishAlphabet $englishAlphabet, InformationView $informationView) {
         $this->englishAlphabet = $englishAlphabet;
+        $this->informationView = $informationView;
+
     }
   
     public function render() {
@@ -26,7 +29,7 @@ class CaesarView {
                     ' . $this->generateInfoLink() . '
                 </div>
                 <div>
-                    ' . $this->generateInputForm() . '
+                    ' . $this->getPageToRender() . '
                 </div>
                 <div>
                     ' . $this->generateOutputField() . '
@@ -40,23 +43,30 @@ class CaesarView {
             return '<a href="?' . $this->caesarInformation . '">Info about Caesar Cipher</a>';
         }
     }
+    private function getPageToRender () {
+        if ($this->isGetInformationPageRequest()) {
+            return $this->informationView->render();
+        } else {
+            return $this->generateInputForm();
+        }
+    }
     private function generateInputForm () {
         return '
-        <form method="post" > 
-            <fieldset>
-                <p>' . $this->message . '</p>
-                <label for="' . $this->textInput . '">Enter your text here: :</label>
-                <input type="text" id="' . $this->textInput . '" name="' . $this->textInput . '" value="' . $this->getRequestTextInput() . '" />
+            <form method="post" > 
+                <fieldset>
+                    <p>' . $this->message . '</p>
+                    <label for="' . $this->textInput . '">Enter your text here: :</label>
+                    <input type="text" id="' . $this->textInput . '" name="' . $this->textInput . '" value="' . $this->getRequestTextInput() . '" />
 
-                <label for="' . $this->key . '">Choose key: </label>
-                <select name="' . $this->key . '">
-                ' . $this->generateDropDownValues() . '
-                </select>
-                
-                <input type="submit" name="' . $this->encrypt . '" value="Generate encrypted message" />
-            </fieldset>
-        </form>
-    ';
+                    <label for="' . $this->key . '">Choose key: </label>
+                    <select name="' . $this->key . '">
+                    ' . $this->generateDropDownValues() . '
+                    </select>
+                    
+                    <input type="submit" name="' . $this->encrypt . '" value="Generate encrypted message" />
+                </fieldset>
+            </form>
+        ';
     }
 
     private function generateOutputField () : string {
