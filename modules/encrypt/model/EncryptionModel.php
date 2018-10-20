@@ -28,19 +28,14 @@ class EncryptionModel {
         return $encryptedMessage;
     }
     private function getCharacterByIndex($index) {
-        try {
-        $encryptedLetter = $this->englishAlphabet->getCharacterByIndex($index);
-        } catch (IndexHigherThanLengthException $e) {
-            echo 'AP AP AP!!';
-        }
+        return $this->englishAlphabet->getCharacterByIndex($index);
     }
     private function getCalculatedIndexByKeyAndIndex ($index) {
         $alphabetLength = $this->englishAlphabet->getLength();
         $newCalculatedIndex =  ($this->key + $index);
-        if ($newCalculatedIndex > $alphabetLength) {
+        if ($newCalculatedIndex >= $alphabetLength) {
             $newCalculatedIndex -= $alphabetLength;
         }
-        echo $newCalculatedIndex . ' HEJ';
         return $newCalculatedIndex;
     }
 

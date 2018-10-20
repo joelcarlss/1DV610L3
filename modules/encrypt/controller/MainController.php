@@ -18,16 +18,15 @@ class MainController {
     
     public function handleRequest() {
         if ($this->caesarView->isEncryptionPost()) {
-            
-            echo $this->encryptPost();
+            $this->encryptPost();
         }
     }
     private function encryptPost () {
         $textInput = $this->caesarView->getTextInput();
         $key = $this->caesarView->getRequestEncryptionKey();
         $this->encryptionModel->setKey($key);
-        $this->encryptionModel->encryptStringWithKey($textInput);
-        $this->caesarView->setEncryptedMessage($textInput);
+        $encryptedMessage = $this->encryptionModel->encryptStringWithKey($textInput);
+        $this->caesarView->setEncryptedMessage($encryptedMessage);
         
     }
   }

@@ -9,6 +9,7 @@ class CaesarView {
 
     private $title = 'Encryption';
     private $encryptedMessage = '';
+    private $keyDefaultValue = 1;
 
     private $englishAlphabet;
 
@@ -67,9 +68,9 @@ class CaesarView {
 
     private function generateOptionAttributes($i) : string {
         $response = '';
-        if ($i == $this->getRequestEncryptionKey()) {
-            $response .= 'selected="selected"';
-        }
+            if ($i == $this->getRequestEncryptionKey()) {
+                $response .= 'selected="selected"';
+            }
         return $response;
     }
 
@@ -81,9 +82,12 @@ class CaesarView {
         return isset($_POST[$this->encrypt]);
     }
 
-    // TODO set type : int? : string?
-    public function getRequestEncryptionKey() {
+    public function getRequestEncryptionKey() : int {
+        if (isset($_POST[$this->key])) {
             return $this->stringToInt($_POST[$this->key]);
+        } else {
+            return $this->keyDefaultValue;
+        }
     }
     private function stringToInt($string) {
         return (int)$string;
