@@ -14,16 +14,34 @@ class EncryptionModel {
     public function setKey(int $key) {
         $this->key = $key;
     }
-    public function encryptStringWithKey(string $string) {
+    public function encryptStringWithKey(string $string) : string {
         $stringAsArray = str_split($string);
         $encryptedMessage = '';
         if (isset($this->key)) {
             foreach ($stringAsArray as $key => $value) {
-                echo $value;
-                echo $this->englishAlphabet->getIndexByCharacter($value);
+                $characterIndex = $this->englishAlphabet->getIndexByCharacter($value);
+                $newCalculatedIndex = $this->getCalculatedIndexByKeyAndIndex($characterIndex);
+                $encryptedLetter = $this->getCharacterByIndex($newCalculatedIndex);
+                $encryptedMessage .= $encryptedLetter;
             }
         }
-
+        return $encryptedMessage;
+    }
+    private function getCharacterByIndex($index) {
+        try {
+        $encryptedLetter = $this->englishAlphabet->getCharacterByIndex($index);
+        } catch (IndexHigherThanLengthException $e) {
+            echo 'AP AP AP!!';
+        }
+    }
+    private function getCalculatedIndexByKeyAndIndex ($index) {
+        $alphabetLength = $this->englishAlphabet->getLength();
+        $newCalculatedIndex =  ($this->key + $index);
+        if ($newCalculatedIndex > $alphabetLength) {
+            $newCalculatedIndex -= $alphabetLength;
+        }
+        echo $newCalculatedIndex . ' HEJ';
+        return $newCalculatedIndex;
     }
 
     public function getIndexPlaceByKeyAndLetter() {

@@ -1,6 +1,7 @@
 <?php
 namespace encrypt\model;
-// require_once('modules/encrypt/model/Alphabet.php');
+use Exception;
+require_once('modules/encrypt/model/customExceptions.php');
 
 class EnglishAlphabet {
 
@@ -11,10 +12,10 @@ class EnglishAlphabet {
     }
 
     public function getCharacterByIndex($i) : string {
-        if ($i < $this->alphabet) {
+        if ($i < count($this->alphabet)) {
             return $this->alphabet[$i];
         } else {
-            throw new Exception('Index value is larger than alphabets length');
+            throw new IndexHigherThanLengthException('Index value is larger than alphabets length');
         }
     }
 
