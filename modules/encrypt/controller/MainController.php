@@ -20,13 +20,15 @@ class MainController {
     public function handleRequest() {
         try {
             if ($this->caesarView->isEncryptionPost()) {
-                    // TODO Set language
-                    $this->encryptPost();
-                } else if ($this->caesarView->isDecryptionPost()) {
-                    $this->decryptPost();
-                }
-            } catch (\encrypt\model\IllegalCharacterException $e) {
-                $this->caesarView->setMessage(\encrypt\view\Messages::INVALID_CHARACTER);
+                // TODO Set language
+                $this->encryptPost();
+            } else if ($this->caesarView->isDecryptionPost()) {
+                $this->decryptPost();
+            }
+        } catch (\encrypt\model\IllegalCharacterException $e) {
+            $this->caesarView->setMessage(\encrypt\view\Messages::INVALID_CHARACTER);
+        } catch (\encrypt\model\EmptyStringException $e) {
+            $this->caesarView->setMessage(\encrypt\view\Messages::NO_CHARACTERS_ENTERED);
         }
     }
     private function encryptPost () {

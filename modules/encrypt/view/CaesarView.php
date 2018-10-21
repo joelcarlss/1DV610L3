@@ -1,5 +1,6 @@
 <?php
 namespace encrypt\view;
+require_once('modules/encrypt/model/customExceptions.php');
 
 class CaesarView {
 
@@ -75,7 +76,7 @@ class CaesarView {
     private function generateOutputField () : string {
         if ($this->stringNotEmpty($this->encryptedMessage)) {
             return '
-                <h3>Encrypted Message:</h3>
+                <h3>Message:</h3>
                 <p>' . $this->encryptedMessage . '</p>
             ';
         } else {
@@ -140,7 +141,7 @@ class CaesarView {
         if ($this->stringNotEmpty($text)) {
             return $text;
         } else {
-            throw new Exception('No text entered');
+            throw new \encrypt\model\EmptyStringException('No text entered');
         }
     }
     private function getRequestTextInput() : string {

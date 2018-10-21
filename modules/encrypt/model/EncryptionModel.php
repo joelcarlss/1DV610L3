@@ -29,24 +29,28 @@ class EncryptionModel {
         $encryptedMessage = '';
         if (isset($this->key)) {
             foreach ($stringAsArray as $key => $value) {
-                $encryptedLetter = '';
-                if ($this->characterIsSpace($value)) { // Handle for space characters
-                    $encryptedLetter .= $this->spaceCharacter;
-                } else { // Encryption of character
-                    $encryptedLetter .= $this->encryptCharacterWithKey($value);
-                    
-                }
+                $encryptedLetter = $this->getEcryptedOrSpaceCharacter($value);
                 $encryptedMessage .= $encryptedLetter;
             }
         }
         return $encryptedMessage;
+    }
+
+    private function getEcryptedOrSpaceCharacter ($character) {
+        $encryptedLetter = '';
+        if ($this->characterIsSpace($character)) { // Handle for space characters
+            $encryptedLetter .= $this->spaceCharacter;
+        } else { // Encryption of character
+            $encryptedLetter .= $this->getEncryptedCharacter($character);   
+        }
+        return $encryptedLetter;
     }
     
     private function characterIsSpace(string $character) {
         return ($character == ' ');
     }
 
-    private function encryptCharacterWithKey(string $character) : string {
+    private function getEncryptedCharacter(string $character) : string {
         $characterIndex = $this->englishAlphabet->getIndexByCharacter($character);
         $newCalculatedIndex = $this->getIndexForEncryptOrDecrypt($characterIndex);    
         $encryptedLetter = $this->englishAlphabet->getCharacterByIndex($newCalculatedIndex);

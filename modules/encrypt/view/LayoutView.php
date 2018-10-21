@@ -3,7 +3,7 @@ namespace encrypt\view;
 
 class LayoutView {
 
-  private $title = 'Encryption';
+  private $title = '';
   
   public function __construct (CaesarView $cv) {
     $this->caesarView = $cv;
