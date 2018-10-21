@@ -25,7 +25,7 @@ class Start {
     $this->mainController->handleRequest();
 }
   
-  public function render() {
+  public function render() : string {
     return $this->layoutView->render();
   }
 }

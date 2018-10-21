@@ -35,6 +35,7 @@ class MainController {
         $this->transferMessageFromEncryptionToView($textInput);
     }
     private function decryptPost () {
+        $this->encryptionModel->setIsDecryption(true);
         $textInput = $this->getTextInputUncapitalized();
         $this->transferKeyFromViewToEncryption();
         $this->transferMessageFromEncryptionToView($textInput);

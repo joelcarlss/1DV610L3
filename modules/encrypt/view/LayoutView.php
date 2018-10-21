@@ -9,7 +9,7 @@ class LayoutView {
     $this->caesarView = $cv;
 }
   
-  public function render() {
+  public function render() : string {
     return '
           <h3> ' . $this->title .' </h3>
             <div>
@@ -18,7 +18,7 @@ class LayoutView {
     ';
   }
 
-  private function getPageToRender() {
+  private function getPageToRender() : string {
     return $this->caesarView->render();
   }
 }

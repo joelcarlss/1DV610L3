@@ -8,6 +8,7 @@ class EncryptionModel {
     private $englishAlphabet;
 
     private $spaceCharacter = ' '; // TODO Make this changeable for user ex. all spaces = y etc
+    private $isDecryption = false;
 
     public function __construct (\encrypt\model\EnglishAlphabet $ea) {
         $this->englishAlphabet = $ea;
@@ -15,6 +16,9 @@ class EncryptionModel {
 
     public function setKey(int $key) {
         $this->key = $key;
+    }
+    public function setIsDecryption(bool $isDecryption) {
+        $this->isDecryption = $isDecryption;
     }
 
     /**
@@ -37,17 +41,32 @@ class EncryptionModel {
         }
         return $encryptedMessage;
     }
+    
+    private function characterIsSpace(string $character) {
+        return ($character == ' ');
+    }
 
     private function encryptCharacterWithKey(string $character) : string {
         $characterIndex = $this->englishAlphabet->getIndexByCharacter($character);
-        $newCalculatedIndex = $this->getPositiveCalculatedIndexByKeyAndIndex($characterIndex);
+        $newCalculatedIndex = $this->getIndexForEncryptOrDecrypt($characterIndex);    
         $encryptedLetter = $this->englishAlphabet->getCharacterByIndex($newCalculatedIndex);
         return $encryptedLetter;
     }
 
-    private function characterIsSpace(string $character) {
-        return ($character == ' ');
+    /**
+     * Chooses if to get encrypt- or decrypt- index dy checking isDecryption bool.
+     * @return integer
+     */
+    private function getIndexForEncryptOrDecrypt (string $characterIndex) : string {
+        $newCalculatedIndex = '';
+        if ($this->isDecryption) {
+            $newCalculatedIndex = $this->getNegativeCalculatedIndexByKeyAndIndex($characterIndex);    
+        } else {
+            $newCalculatedIndex = $this->getPositiveCalculatedIndexByKeyAndIndex($characterIndex);
+        }
+        return $newCalculatedIndex;
     }
+
 
     /**
      * Calculates index by adding key value to characters index value
@@ -71,9 +90,9 @@ class EncryptionModel {
      */
     private function getNegativeCalculatedIndexByKeyAndIndex ($index) : int {
         $alphabetLength = $this->englishAlphabet->getLength();
-        $newCalculatedIndex =  ($this->key - $index);
-        if ($newCalculatedIndex >= $alphabetLength) {
-            $newCalculatedIndex -= $alphabetLength;
+        $newCalculatedIndex =  ($index - $this->key);
+        if ($newCalculatedIndex < 0) {
+            $newCalculatedIndex += $alphabetLength;
         }
         return $newCalculatedIndex;
     }
