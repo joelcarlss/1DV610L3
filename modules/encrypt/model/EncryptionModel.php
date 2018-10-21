@@ -14,15 +14,16 @@ class EncryptionModel {
         $this->englishAlphabet = $ea;
     }
 
-    public function setKey(int $key) {
+    public function setKey(int $key) : void {
         $this->key = $key;
     }
-    public function setIsDecryption(bool $isDecryption) {
+    public function setIsDecryption(bool $isDecryption) : void {
         $this->isDecryption = $isDecryption;
     }
 
     /**
-     * Encrypts string with key.
+     * Encrypts string with key if key exists.
+     * @return string
      */
     public function encryptStringWithKey(string $string) : string {
         $stringAsArray = str_split($string);
@@ -36,7 +37,7 @@ class EncryptionModel {
         return $encryptedMessage;
     }
 
-    private function getEcryptedOrSpaceCharacter ($character) {
+    private function getEcryptedOrSpaceCharacter ($character) : string {
         $encryptedLetter = '';
         if ($this->characterIsSpace($character)) { // Handle for space characters
             $encryptedLetter .= $this->spaceCharacter;

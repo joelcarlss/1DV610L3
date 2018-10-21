@@ -24,7 +24,7 @@ class CaesarView {
 
     }
   
-    public function render() {
+    public function render() : string {
         return '
             <h1>Ceasar Encryption</h1>
                 <div>
@@ -38,21 +38,21 @@ class CaesarView {
                 </div>
         ';
     }
-    private function generateInfoLink() {
+    private function generateInfoLink() : string {
         if ($this->isGetInformationPageRequest()) {
             return '<a href="?">Back to encryption</a>';
         } else {
             return '<a href="?' . $this->caesarInformation . '">Info about Caesar Cipher</a>';
         }
     }
-    private function getPageToRender () {
+    private function getPageToRender () : string {
         if ($this->isGetInformationPageRequest()) {
             return $this->informationView->render();
         } else {
             return $this->generateInputForm();
         }
     }
-    private function generateInputForm () {
+    private function generateInputForm () : string {
         return '
             <form method="post" > 
                 <fieldset>
@@ -102,7 +102,7 @@ class CaesarView {
     }
 
     // SETS
-    public function setMessage($message) {
+    public function setMessage($message) : void {
         $this->message = $message;
     }
     public function setEncryptedMessage ($encryptedMessage) : void {
@@ -110,7 +110,7 @@ class CaesarView {
     }
 
     // GET REQUEST HANDLING
-    public function isGetInformationPageRequest () {
+    public function isGetInformationPageRequest () : bool {
         if (!empty($_GET)) {
             if(isset($_GET[$this->caesarInformation])) {
             return true;
@@ -136,7 +136,7 @@ class CaesarView {
         }
     }
 
-    public function getTextInput () {
+    public function getTextInput () : string {
         $text = $this->getRequestTextInput();
         if ($this->stringNotEmpty($text)) {
             return $text;
@@ -153,7 +153,7 @@ class CaesarView {
     }
 
     // Other Low level functions
-    private function stringToInt($string) {
+    private function stringToInt($string) : int {
         return (int)$string;
     }
 

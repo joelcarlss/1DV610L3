@@ -9,10 +9,6 @@ class DateTimeView {
 	public function setTime($time) {
 		$this->time = $time;
 	}
-	/**
-	 * Gets time from controller
-	 * @return string
-	 */
 	public function showTime() {
 
 		$timeString = $this->time;
