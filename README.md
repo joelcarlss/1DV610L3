@@ -10,10 +10,12 @@ A login system built with SQL database that registers new-, authenticates- and l
 Requires an SQL-database.
 Inside app/model/DatabaseConnection.php the constants can be changed to correct values:
 
+´´´
 $server = SERVER_ADRESS;
 $database = DATABASE;
 $username = DB_USERNAME;
 $password = DB_PASSWORD;
+´´´
 
 ## Encryption
 Encryption is a small application that is meant to hold many crypto systems. 
@@ -23,8 +25,10 @@ Right now there is only Caesar Cipher.
 The module encrypt is uable by instantiation of Start class,
 then call its render() method and show its return in an echo or similar inside a html-document.
 
+´´´
 $enc = new \encrypt\Start();
 echo $enc->render();
+´´´
 
 ## Use Cases and tests
 Available on the github wiki:
