@@ -6,6 +6,7 @@ class CaesarView {
     private $textInput = 'EncryptionView::TextInput';
     private $key = 'EncryptionView::Key';
     private $encrypt = 'EncryptionView::Encrypt';
+    private $decrypt = 'EncryptionView::Decrypt';
     private $caesarInformation = 'EncryptionView::CaesarInformation';
 
     private $title = 'Encryption';
@@ -64,6 +65,8 @@ class CaesarView {
                     </select>
                     
                     <input type="submit" name="' . $this->encrypt . '" value="Generate encrypted message" />
+
+                    <input type="submit" name="' . $this->decrypt . '" value="Decrypt message" />
                 </fieldset>
             </form>
         ';
@@ -118,6 +121,10 @@ class CaesarView {
     // POST REQUEST HANDLING
     public function isEncryptionPost () : bool {
         return isset($_POST[$this->encrypt]);
+    }
+
+    public function isDecryptionPost () : bool {
+        return isset($_POST[$this->decrypt]);
     }
 
     public function getRequestEncryptionKey() : int {

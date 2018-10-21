@@ -40,7 +40,7 @@ class EncryptionModel {
 
     private function encryptCharacterWithKey(string $character) : string {
         $characterIndex = $this->englishAlphabet->getIndexByCharacter($character);
-        $newCalculatedIndex = $this->getCalculatedIndexByKeyAndIndex($characterIndex);
+        $newCalculatedIndex = $this->getPositiveCalculatedIndexByKeyAndIndex($characterIndex);
         $encryptedLetter = $this->englishAlphabet->getCharacterByIndex($newCalculatedIndex);
         return $encryptedLetter;
     }
@@ -55,9 +55,23 @@ class EncryptionModel {
      * Meaning: If alphabet has length 23: (1 + 1 = 2; 23 + 1 = 0)
      * @return integer
      */
-    private function getCalculatedIndexByKeyAndIndex ($index) : int {
+    private function getPositiveCalculatedIndexByKeyAndIndex ($index) : int {
         $alphabetLength = $this->englishAlphabet->getLength();
         $newCalculatedIndex =  ($this->key + $index);
+        if ($newCalculatedIndex >= $alphabetLength) {
+            $newCalculatedIndex -= $alphabetLength;
+        }
+        return $newCalculatedIndex;
+    }
+    /**
+     * Calculates index by removing key value to characters index value
+     * If the value is lower than zero value will restart by adding the length of alphabet to key
+     * Meaning: If alphabet has length 23: (1 - 1 = 0; 0 - 1 = 23)
+     * @return integer
+     */
+    private function getNegativeCalculatedIndexByKeyAndIndex ($index) : int {
+        $alphabetLength = $this->englishAlphabet->getLength();
+        $newCalculatedIndex =  ($this->key - $index);
         if ($newCalculatedIndex >= $alphabetLength) {
             $newCalculatedIndex -= $alphabetLength;
         }
