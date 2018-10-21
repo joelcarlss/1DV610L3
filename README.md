@@ -26,3 +26,6 @@ then call its render() method and show its return in an echo or similar inside a
 $enc = new \encrypt\Start();
 echo $enc->render();
 
+## Use Cases and tests
+Available on the github wiki:
+https://github.com/joelcarlss/1DV610L3/wiki
